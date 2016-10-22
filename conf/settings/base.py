@@ -29,6 +29,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'core',
+    'api',
+    'guest',
+    'hostess',
+    'kitchen',
 )
 
 MIDDLEWARE_CLASSES = (
