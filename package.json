@@ -1,8 +1,8 @@
 {
-  "name": "",
+  "name": "Order's Up",
   "version": "1.0.0",
-  "description": "",
-  "repository": "",
+  "description": "A Restaurant management system",
+  "repository": "https://github.com/KellyInnovation/orders-up",
   "engines": {
     "node": "6.8.1"
   },

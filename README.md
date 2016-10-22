@@ -1,7 +1,14 @@
-# DJANGO SEED
+#Order's Up
 
-Starting point for Django, Django Rest Framework, Angular, Webpack and Gulp projects.
+This is the capstone project for the Awesome Inc. U. Bootcamp Fall 2016.
 
-See the using-django-seed.md in the docs for usage.
+#This is a restaurant management system to improve customer experience and restaurant efficiency.
 
-**Replace the contents of this doc with a README for your project**
+##The Customer
+
+The customer can order food while waiting for a table via a unique website.
+
+##The Restaurant Host
+
+The hostess can add parties to the system, approximate seating time, and notify guests of their unique website for ordering.
+
