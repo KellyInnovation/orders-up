@@ -5,8 +5,7 @@ class Guest(models.Model):
 	first_name = models.CharField(max_length=70, null=True, blank=True)
 	last_name = models.CharField(max_length=70, null=True, blank=True)
 
-	party_number = models.IntegerField()
-	party_url = models.CharField(max_length=300)
+	party_id = models.ForeignKey('hostess.Hostess', default='1')
 
 	drink = models.CharField(max_length=30, default='water')
 	appetizer = models.CharField(max_length=100, null=True, blank=True)
@@ -15,3 +14,4 @@ class Guest(models.Model):
 	dessert = models.CharField(max_length=100, null=True, blank=True)
 
 	special_instructions = models.CharField(max_length=500, null=True, blank=True)
+

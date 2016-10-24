@@ -1,0 +1,38 @@
+
+nav {
+	background-color: black;
+	color: #d4af37;
+}
+
+footer {
+	bottom: 10px;
+}
+
+.icon-bar {
+	background-color: #d4af37;
+}
+
+.navbar-header {
+	text-align: center;
+}
+
+.orders-up {
+	vertical-align: middle;
+	font-size: 24px;
+}
+
+.restaurant-name {
+	font-size: 32px;
+
+}
+
+.menu-title {
+	text-align: center;
+}
+
+.guest-button {
+	background-color: #d4af37;
+	border-radius: 4px;
+	color: black;
+}
+
