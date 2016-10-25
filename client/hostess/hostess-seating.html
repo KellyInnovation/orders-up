@@ -1,3 +1,13 @@
-{{ hostessSeatingCtrl.party.checkin_time }}
-{{ hostessSeatingCtrl.party.party_name }}
-{{ hostessSeatingCtrl.party.number_in_party }}
+<div class="col-md-7">
+	<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>
+</div>
+<div class="col-md-1">
+	<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>
+</div>
+<div class="col-md-4">
+	<button class="guest-button">
+		{{ hostessSeatingCtrl.party.checkin_time }}
+	</button>
+</div>
+
+

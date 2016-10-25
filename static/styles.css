@@ -41,3 +41,10 @@ footer {
 	color: black;
 }
 
+.hostess-seating-rows :nth-of-type(odd) {
+
+}
+
+.hostess-seating-rows :nth-of-type(even) {
+
+}
