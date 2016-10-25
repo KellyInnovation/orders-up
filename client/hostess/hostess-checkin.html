@@ -1,0 +1,22 @@
+<h1>formy world</h1>
+
+<form ng-submit="hostessCheckinCtrl.addParty()">
+	<div class="form-group">
+		<label>
+			Name of Party
+		</label>
+		<input 
+			type="text" 
+			class="form-control" 
+			ng-model="hostessCheckinCtrl.editedParty.party_name"
+		>
+		<label>
+			Number in Party
+		</label>
+		<input 
+			type="number"
+			class="form-control" 
+			ng-model="hostessCheckinCtrl.editedParty.number_in_party"
+		>
+	</div>
+</form>

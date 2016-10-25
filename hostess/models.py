@@ -9,6 +9,7 @@ class Hostess(models.Model):
 
 	unique_party_id = models.IntegerField(default=1)
 	unique_party_url = models.URLField(blank=True)
+	checkin_time = models.DateTimeField(auto_now_add=True)
 
 	party_name = models.CharField(max_length=200)
 	number_in_party = models.IntegerField()
