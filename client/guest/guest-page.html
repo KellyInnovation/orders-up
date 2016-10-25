@@ -1,12 +1,21 @@
 <div>
-	<img src="./photos/gourmet_food.jpeg"/>
+	<img src="/guest/gourmet_food.jpeg"/>
 	<button class="guest-button">Login</button>
 	<button class="guest-button">Register</button>
 </div>
 
-
 <div class="row">
 	<h2 class="menu-title">Menu</h2>
+</div>
+
+<div 
+	class="row" 
+	
+>
+	<guest-menu 
+		ng-repeat="guest in guestPageCtrl.guests"
+		guest="guest"
+	/>
 </div>
 
 <div class="row">

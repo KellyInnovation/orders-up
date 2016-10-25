@@ -15,3 +15,4 @@ class Guest(models.Model):
 
 	special_instructions = models.CharField(max_length=500, null=True, blank=True)
 
+	food_options = models.ForeignKey('kitchen.Kitchen', null=True, blank=True)

@@ -3,6 +3,7 @@ import 'angular-resource';
 import 'angular-filter';
 
 import guestPageComponent from './guest-page.component';
+import guestMenuComponent from './guest-menu.component';
 
 import guestAPIService from './guest-api.service';
 
@@ -15,6 +16,7 @@ const GuestModule = angular.module(
 		$resourceProvider.defaults.stripTrailingSlashes = false;
 	}) 
 	.factory('guestAPIService', guestAPIService)
-	.component('guestPage', guestPageComponent);
+	.component('guestPage', guestPageComponent)
+	.component('guestMenu', guestMenuComponent);
 
 export default GuestModule;
