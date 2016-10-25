@@ -17,10 +17,6 @@ footer {
 	background-color: #d4af37;
 }
 
-.navbar-header {
-	text-align: center;
-}
-
 .orders-up {
 	vertical-align: middle;
 	font-size: 24px;
@@ -28,7 +24,11 @@ footer {
 
 .restaurant-name {
 	font-size: 32px;
-
+	position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
 }
 
 .menu-title {

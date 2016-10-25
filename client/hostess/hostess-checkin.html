@@ -1,22 +1,67 @@
-<h1>formy world</h1>
 
 <form ng-submit="hostessCheckinCtrl.addParty()">
 	<div class="form-group">
-		<label>
+		<h3>
 			Name of Party
-		</label>
+		</h3>
 		<input 
 			type="text" 
 			class="form-control" 
 			ng-model="hostessCheckinCtrl.editedParty.party_name"
 		>
-		<label>
+		<h3>
 			Number in Party
-		</label>
+		</h3>
 		<input 
 			type="number"
 			class="form-control" 
 			ng-model="hostessCheckinCtrl.editedParty.number_in_party"
 		>
+		<h3>
+			Phone Number
+		</h3>
+		<input 
+			type="text"
+			class="form-control" 
+			ng-model="hostessCheckinCtrl.editedParty.phone_number"
+		>
+		<h3>
+			Seating Preferences
+		</h3>
+		<div class="radio">
+			<label>
+				Any
+				<input 
+					type="radio" 
+					ng-model="hostessCheckinCtrl.editedParty.seating"
+					value="Any"
+					checked			
+				>
+			</label>
+			<label>
+				Booth
+				<input 
+					type="radio" 
+					ng-model="hostessCheckinCtrl.editedParty.seating"
+					value="Booth"		
+				>
+			</label>
+			<label>
+				Table
+				<input 
+					type="radio" 
+					ng-model="hostessCheckinCtrl.editedParty.seating"
+					value="Table"		
+				>
+			</label>
+		</div>
+		<h3>Additional Preferences</h3>
+		<input 
+			type="text"
+			ng-model="hostessCheckinCtrl.editedParty.seating_requests"
+		>
 	</div>
+	<button class="guest-button" type="submit">
+		Add Party
+	</button>
 </form>

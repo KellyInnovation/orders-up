@@ -10,6 +10,9 @@
 	</div>
 	<div class="col-md-7">
 		<h2>Seating</h2>
-		
+		<hostess-seating 
+			ng-repeat="party in hostessPageCtrl.parties"
+			party="party"
+		/>
 	</div>
 </div>
