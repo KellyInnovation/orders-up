@@ -5,7 +5,7 @@ class Guest(models.Model):
 	first_name = models.CharField(max_length=70, null=True, blank=True)
 	last_name = models.CharField(max_length=70, null=True, blank=True)
 
-	party_id = models.ForeignKey('hostess.Hostess', default='1')
+	party_id = models.ForeignKey('hostess.Hostess', default='1', related_name='guest_party')
 
 	food_options = models.ForeignKey('kitchen.Kitchen', null=True, blank=True, related_name='menu_options')
 
