@@ -7,12 +7,13 @@ class Guest(models.Model):
 
 	party_id = models.ForeignKey('hostess.Hostess', default='1')
 
-	drink = models.CharField(max_length=30, default='water')
-	appetizer = models.CharField(max_length=100, null=True, blank=True)
-	entree = models.CharField(max_length=50, null=True, blank=True)
-	side_item = models.CharField(max_length=100, null=True, blank=True)
-	dessert = models.CharField(max_length=100, null=True, blank=True)
-
-	special_instructions = models.CharField(max_length=500, null=True, blank=True)
-
 	food_options = models.ForeignKey('kitchen.Kitchen', null=True, blank=True)
+
+class GuestOrder(models.Model):
+
+	drink = models.CharField(max_length=30, default='water')
+	food = models.CharField(max_length=400, null=True, blank=True)
+
+	special_instructions = models.CharField(max_length=500, null=True, blank=True)	
+
+	guest = models.ForeignKey(Guest, related_name='guest_order')

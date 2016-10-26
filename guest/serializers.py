@@ -1,9 +1,21 @@
 from rest_framework import serializers
 
-from .models import Guest
+from .models import Guest, GuestOrder
+
+from kitchen.serializers import KitchenSerializer
+
+class GuestOrderSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = GuestOrder
+		fields = ('id', 'drink', 'food', 'special_instructions',)
 
 class GuestSerializer(serializers.ModelSerializer):
+	guest_order = GuestOrderSerializer(many=True)
+	menus = KitchenSerializer(many=True, read_only=True)
+
 
 	class Meta:
 		model = Guest
-		fields = ('id', 'first_name', 'last_name', 'party_id', 'drink', 'appetizer', 'entree', 'side_item', 'dessert', 'special_instructions', 'food_options',)
+		fields = ('id', 'first_name', 'last_name', 'party_id', 'guest_order', 'food_options', 'menus')
+
