@@ -7,7 +7,7 @@ class Guest(models.Model):
 
 	party_id = models.ForeignKey('hostess.Hostess', default='1')
 
-	food_options = models.ForeignKey('kitchen.Kitchen', null=True, blank=True)
+	food_options = models.ForeignKey('kitchen.Kitchen', null=True, blank=True, related_name='menu_options')
 
 class GuestOrder(models.Model):
 

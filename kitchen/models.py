@@ -23,4 +23,4 @@ class Kitchen(models.Model):
 	meat_size = models.CharField(max_length=20, null=True, blank=True)
 	category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='Other', null=True, blank=True)
 
-	guest_order = models.ForeignKey('guest.GuestOrder', null=True, blank=True)
+	guest = models.ForeignKey('guest.Guest', null=True, blank=True, related_name='guest_menu')

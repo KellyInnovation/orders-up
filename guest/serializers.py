@@ -12,10 +12,10 @@ class GuestOrderSerializer(serializers.ModelSerializer):
 
 class GuestSerializer(serializers.ModelSerializer):
 	guest_order = GuestOrderSerializer(many=True)
-	menus = KitchenSerializer(many=True, read_only=True)
+	guest_menu = KitchenSerializer(many=True, read_only=True)
 
 
 	class Meta:
 		model = Guest
-		fields = ('id', 'first_name', 'last_name', 'party_id', 'guest_order', 'food_options', 'menus')
+		fields = ('id', 'first_name', 'last_name', 'party_id', 'guest_order', 'guest_menu',)
 
