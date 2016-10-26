@@ -18,7 +18,7 @@ class Kitchen(models.Model):
 
 	item_name = models.CharField(max_length=200)
 	item_description = models.TextField(null=True, blank=True)
-	item_price = models.DecimalField(max_digits=10000, decimal_places=2)
+	item_price = models.DecimalField(max_digits=10000, decimal_places=0)
 
 	meat_size = models.CharField(max_length=20, null=True, blank=True)
 	category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='Other', null=True, blank=True)

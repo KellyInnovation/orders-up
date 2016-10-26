@@ -48,3 +48,7 @@ footer {
 .hostess-seating-rows :nth-of-type(even) {
 
 }
+
+.menu-categories {
+	text-align: center;
+}
