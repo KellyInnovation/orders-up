@@ -11,6 +11,7 @@ const GuestModule = angular.module(
 	'guests', [
 	'ngResource',
 	'angular.filter',
+
 ])
 	.config(($resourceProvider) => {
 		$resourceProvider.defaults.stripTrailingSlashes = false;

@@ -12,6 +12,7 @@ const HostessModule = angular.module(
 	'parties', [
 	'ngResource',
 	'angular.filter',
+
 ])
 	.config(($resourceProvider) => {
 		$resourceProvider.defaults.stripTrailingSlashes = false;

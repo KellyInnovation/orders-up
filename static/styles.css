@@ -52,3 +52,11 @@ footer {
 .menu-categories {
 	text-align: center;
 }
+
+.modal-header {
+	background-color: black;
+	color: #d4af37;
+	font-size: 24px;
+	text-align: center;
+}
+
