@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-resource';
-import 'angular-filter';
+
 
 import hostessPageComponent from './hostess-page.component';
 import hostessCheckinComponent from './hostess-checkin.component';
@@ -11,7 +11,7 @@ import hostessAPIService from './hostess-api.service';
 const HostessModule = angular.module(
 	'parties', [
 	'ngResource',
-	'angular.filter',
+
 
 ])
 	.config(($resourceProvider) => {

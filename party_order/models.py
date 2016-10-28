@@ -2,6 +2,7 @@ from django.db import models
 
 class PartyOrder(models.Model):
 
+	hostess_party = models.ForeignKey('hostess.Hostess', related_name='hostess_party')
 
 class GuestOrder(models.Model):
 
@@ -11,3 +12,4 @@ class GuestOrder(models.Model):
 	special_instructions = models.CharField(max_length=500, null=True, blank=True)	
 
 	guest = models.ForeignKey('guest.Guest', related_name='guest_order')
+	party = models.ForeignKey(PartyOrder, related_name='guest_user')

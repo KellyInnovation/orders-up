@@ -2,10 +2,6 @@ from rest_framework import serializers
 
 from .models import Guest
 
-from kitchen.serializers import KitchenSerializer
-
-
-
 class GuestSerializer(serializers.ModelSerializer):
 
 

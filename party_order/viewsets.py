@@ -1,9 +1,8 @@
 from rest_framework import viewsets
 
-from .models import GuestOrder
-from .serializers import GuestOrderSerializer
+from .models import PartyOrder
+from .serializers import PartyOrderSerializer
 
-class GuestOrderViewSet(viewsets.ModelViewSet):
-
-	queryset = GuestOrder.objects.all()
-	serializer_class = GuestOrderSerializer
+class PartyOrderViewSet(viewsets.ModelViewSet):
+	queryset = PartyOrder.objects.all()
+	serializer_class = PartyOrderSerializer
