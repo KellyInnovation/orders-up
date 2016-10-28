@@ -1,5 +1,6 @@
 body {
 	margin-top: 70px;
+	margin-bottom: 70px;
 }
 
 nav {
@@ -21,9 +22,8 @@ footer {
 	background-color: #d4af37;
 }
 
-.orders-up {
-	vertical-align: middle;
-	font-size: 24px;
+#orders-up {
+	margin-top: 5px;
 }
 
 .restaurant-name {
@@ -32,7 +32,7 @@ footer {
     width: 100%;
     left: 0;
     text-align: center;
-    margin:0 auto;
+    vertical-align: middle;
 }
 
 .menu-title {
