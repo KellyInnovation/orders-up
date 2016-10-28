@@ -13,6 +13,8 @@ footer {
 	text-align: center;
 }
 
+
+
 .icon-bar {
 	background-color: #d4af37;
 }
@@ -60,3 +62,6 @@ footer {
 	text-align: center;
 }
 
+.guest-main-photo {
+	width: 100%;
+}
