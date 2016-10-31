@@ -16,12 +16,19 @@ const AppModule = angular.module('app', [
 	PartyModule.name,
 ])
     .component('app', appComponent)
-    .config(function($stateProvider) {
-    	var partyState = {
-    		name: 'party',
-    		url: 'party-page.html',
-    	}
-    $stateProvider.state(partyState);
+    .config(($stateProvider, $urlRouterProvider) => {
+    	$urlRouterProvider.otherwise('/');
+
+        $stateProvider.state('index', {
+            url: '/',
+            resolve: {
+                parties(
+                    partyAPIService) {
+                    return partyAPIService.getAllParties();
+                },
+            },
+            component: 'partyPage',
+        });
     });
 
 export default AppModule;

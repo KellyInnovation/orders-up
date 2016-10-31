@@ -6,7 +6,7 @@ import partyPageComponent from './party-page.component';
 import partyAPIService from './party-api.service';
 
 const PartyModule = angular.module(
-	'parties', [
+	'party', [
 	'ngResource',
 
 ])

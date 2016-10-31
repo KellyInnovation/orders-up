@@ -1,3 +1,7 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
-# Create your views here.
+# from .models import Party
+# from .serializers import PartySerializer
+
+# class AppView(TemplateView):
+# 	template_name = 'party/app.html'
