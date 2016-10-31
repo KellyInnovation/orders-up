@@ -1,5 +1,5 @@
 import angular from 'angular';
-import 'angular-resource';
+import angularResource from 'angular-resource';
 
 
 import partyPageComponent from './party-page.component';
@@ -8,14 +8,10 @@ import partyAPIService from './party-api.service';
 
 const PartyModule = angular.module(
 	'parties', [
-	'ngResource',
-
+	angularResource,
 
 ])
-	.config(($resourceProvider) => {
-		$resourceProvider.defaults.stripTrailingSlashes = false;
-	}) 
-	.factory('partyAPIService', partyAPIService)
+	.factory('partyAPIService', partyAPIService) 
 	.component('partyPage', partyPageComponent);
 
 export default PartyModule;

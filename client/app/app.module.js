@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import angularCookies from 'angular-cookies';
 
 import GuestModule from '../guest/guest.module';
 import HostessModule from '../hostess/hostess.module';
@@ -22,15 +23,16 @@ const AppModule = angular.module('app', [
     	$stateProvider.state('index', {
     		url: '/',
     		resolve: {
-    			party(partyAPIService) {
+    			parties(partyAPIService) {
     				return partyAPIService.getAllparties();
     			},
     		},
-    		component: 'partyList',
+    		component: 'partyPage',
     	}).state('party', {
     		url: '/party/{partyId}',
-    	})
-    })
-    ;
+    		template: 'party-page.html'
+    	});
+    });
+
 
 export default AppModule;

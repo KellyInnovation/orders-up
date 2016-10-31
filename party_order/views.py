@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+from .models import PartyOrder, GuestOrder
+from .serializers import PartyOrderSerializer
+
+class AppView(TemplateView):
+	template_name = 'party/app.html'

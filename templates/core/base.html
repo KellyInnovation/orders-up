@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         {% block title %}
+            Order's Up
         {% endblock title %}
     </title>
 
@@ -26,13 +27,55 @@
 </head>
 <body>
   
-  {% block content %}
-      
-  {% endblock content %}
+    {% block content %}
+        <header>
+            <nav class="navbar navbar-fixed-top">
+                <div class="container">
+                    
+                    <div class="navbar-header">
+                        <button 
+                            type="button"
+                            class="navbar-toggle collapsed"
+                            data-toggle="collapse"
+                            data-target="#header-navbar-collapse"
+                        >
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                        <span class="restaurant-name">
+                            Essen
+                        </span>            
+                    </div>
+                    <div id="header-navbar-collapse" class="collapse navbar-collapse">
+                        
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="orders-up">
+                                Order's Up
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block page_content %}
+                
+            {% endblock page_content %}
+        </div>
+    {% endblock content %}
 
-  {% block body_scripts %}
+    {% block body_scripts %}
       
-  {% endblock body_scripts %}
+    {% endblock body_scripts %}
 </body>
 <footer>Kelly Innovation</footer>
 </html>

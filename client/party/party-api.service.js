@@ -1,13 +1,19 @@
 
 function partyAPIService($resource) {
-	const partyResource = {
-		parties: $resource('/api/party_order/:id',
-			{ id: '@id' },
-		),
-
+	const partyResource = $resource('/api/party_order/:id/',
+			{ id: '@id' });
+	return {
+		getAllParties() {
+			return partyResource.get({}).$promise.then((data) => {
+				return data.results;
+			});
+		},
+		getParty(id) {
+			return partyResource.get({ id }).$promise.then((data) => {
+				return data;
+			});
+		},
 	};
-
-	return api;
 }
 
 export default partyAPIService;

@@ -4,6 +4,9 @@ import PartyPageController from './party-page.controller';
 
 const partyPageComponent = {
 	template,
+	bindings: {
+		parties: '<',
+	},
 	controller: PartyPageController,
 	controllerAs: 'partyPageCtrl',
 };

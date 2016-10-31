@@ -1,12 +1,16 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from django.core.urlresolvers import reverse_lazy
+
 from unipath import Path
 
 BASE_DIR = Path(__file__).ancestor(3)
 TEMPLATE_DIR = BASE_DIR.child("templates")
 STATIC_FILE_DIR = BASE_DIR.child("static")
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = BASE_DIR.child("media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -106,3 +110,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
