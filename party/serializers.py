@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from .models import GuestOrder, Party
+from .models import Party
 
-class GuestOrderSerializer(serializers.ModelSerializer):
+# class GuestOrderSerializer(serializers.ModelSerializer):
 
-	class Meta:
-		model = GuestOrder
-		fields = ('id', 'drink', 'food', 'special_instructions',)
+# 	class Meta:
+# 		model = GuestOrder
+# 		fields = ('id', 'drink', 'food', 'special_instructions',)
 
 class PartySerializer(serializers.ModelSerializer):
 

@@ -7,7 +7,7 @@ class Hostess(models.Model):
 		('TABLE', 'Table'),
 	)
 
-	unique_party_id = models.IntegerField(default=1)
+	hostess_slug = models.SlugField(max_length=200, unique=True, )
 	unique_party_url = models.URLField(blank=True)
 	checkin_time = models.DateTimeField(auto_now_add=True)
 
@@ -17,3 +17,5 @@ class Hostess(models.Model):
 	
 	seating = models.CharField(max_length=100, choices=SEATING_CHOICES, default='Any')
 	seating_requests = models.TextField(max_length=500, null=True, blank=True)
+
+	

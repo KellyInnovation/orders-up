@@ -5,6 +5,7 @@ import 'angular-filter';
 
 import kitchenPageComponent from './kitchen-page.component';
 import kitchenMenuComponent from './kitchen-menu.component';
+import kitchenPartyComponent from './kitchen-party.component';
 
 import kitchenAPIService from './kitchen-api.service';
 
@@ -18,6 +19,7 @@ const KitchenModule = angular.module('menus', [
 	})
 	.factory('kitchenAPIService', kitchenAPIService)
 	.component('kitchenPage', kitchenPageComponent)
-	.component('kitchenMenu', kitchenMenuComponent);
+	.component('kitchenMenu', kitchenMenuComponent)
+	.component('kitchenParty', kitchenPartyComponent);
 
 export default KitchenModule;

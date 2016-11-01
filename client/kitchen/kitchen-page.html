@@ -1,16 +1,3 @@
-<div >
-	<div
-		ng-repeat="(key, value) in kitchenPageCtrl.menus | groupBy: 'category'"
-	>
-		<div class="col-xs-12 menu-categories">
-			<h3>{{ key }}</h3>
-		</div>
-		<kitchen-menu
-			ng-repeat="item in value"
-			item="item"
-		/>
-	</div>
-</div>
 
 <div class="row">
 	<div class="col-md-3">

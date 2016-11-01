@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'guest',
     'hostess',
     'kitchen',
+    'party',
 )
 
 MIDDLEWARE_CLASSES = (
