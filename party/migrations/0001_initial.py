@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Party',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('drink', models.CharField(max_length=30, default='water')),
                 ('food', models.CharField(max_length=400, null=True, blank=True)),
                 ('special_instructions', models.CharField(max_length=500, null=True, blank=True)),
