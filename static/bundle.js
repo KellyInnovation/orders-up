@@ -99,6 +99,12 @@
 	        //     },
 	        // },
 	        component: 'partyPage'
+	    }).state('kitchen', {
+	        url: '/kitchen',
+	        component: 'kitchenPage'
+	    }).state('hostess', {
+	        url: '/hostess',
+	        component: 'hostessPage'
 	    });
 	});
 	
