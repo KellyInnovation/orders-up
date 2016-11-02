@@ -24,3 +24,5 @@ class Kitchen(models.Model):
 	category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='Other', null=True, blank=True)
 
 	guest = models.ForeignKey('guest.Guest', null=True, blank=True, related_name='guest_menu')
+
+	orders = models.ManyToManyField('party.Party', through='kitchen_order.KitchenOrder', through_fields=('kitchen', 'party'))
