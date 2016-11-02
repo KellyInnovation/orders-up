@@ -7,7 +7,7 @@ class Hostess(models.Model):
 		('TABLE', 'Table'),
 	)
 
-	hostess_slug = models.SlugField(max_length=200, unique=True, )
+	# hostess_slug = models.SlugField(max_length=200, unique=True, )
 	unique_party_url = models.URLField(blank=True)
 	checkin_time = models.DateTimeField(auto_now_add=True)
 
