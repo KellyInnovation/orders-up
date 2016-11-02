@@ -6,6 +6,7 @@ class Party(models.Model):
 
 	special_instructions = models.CharField(max_length=500, null=True, blank=True)	
 
+	hostess = models.OneToOneField('hostess.Hostess', primary_key=True)
 
 # class GuestOrder(models.Model):
 
