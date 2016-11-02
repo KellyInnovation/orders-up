@@ -44126,7 +44126,7 @@
 /* 41 */
 /***/ function(module, exports) {
 
-	module.exports = "<button class=\"guest-button logins\">Login</button>\n<button class=\"guest-button logins\">Register</button>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"row\">\t\n\t<kitchen-party />\n</div>\n"
+	module.exports = "<button class=\"guest-button logins\">Login</button>\n<button class=\"guest-button logins\">Register</button>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<h1>ADD a line</h1>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"row\">\t\n\t<kitchen-party />\n</div>\n"
 
 /***/ },
 /* 42 */
