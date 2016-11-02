@@ -7,8 +7,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('kitchen_order', '0001_initial'),
         ('party', '0001_initial'),
+        ('kitchen_order', '0001_initial'),
         ('kitchen', '0001_initial'),
     ]
 
