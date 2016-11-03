@@ -5,7 +5,7 @@ import HostessCheckinController from './hostess-checkin.controller';
 const hostessCheckinComponent = {
 	template,
 	bindings: {
-		party: '<',
+		hostess: '<',
 		save: '&',
 	},
 	controller: HostessCheckinController,

@@ -43671,7 +43671,7 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1>Hostess Container</h1>\n\n<div class=\"row\">\n\t<div class=\"col-md-5\">\n\t\t<h2>Check-In</h2>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7\">\n\t\t<h2>Seating</h2>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.parties | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-5\">\n\t\t<h2>Check-In</h2>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7\">\n\t\t<h2>Seating</h2>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.parties | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 20 */
@@ -43691,21 +43691,17 @@
 			hostessAPIService.parties.get().$promise.then(function (data) {
 				ctrl.parties = data.results;
 			});
-			console.log('hello');
 		};
 	
 		getParties();
 	
-		// ctrl.saveParty = function saveParty(editedParty) {
-		// 	hostessAPIService.parties.save(editedParty).$promise.then((savedParty) => {
-		// 		ctrl.parties = [
-		// 			savedParty,
-		// 				ctrl.party,
-		// 		];
-		// 		ctrl.editedParty = {};
-		// 		alert("party added")
-		// 	}); 
-		// };
+		ctrl.saveParty = function saveParty(editedParty) {
+			hostessAPIService.hostess.save(editedParty).$promise.then(function (savedParty) {
+				ctrl.hostess = [savedParty, ctrl.hostess];
+				ctrl.editedParty = {};
+				alert('Party added');
+			});
+		};
 	}
 	
 	exports.default = HostessPageController;
@@ -43733,7 +43729,7 @@
 	var hostessCheckinComponent = {
 		template: _hostessCheckin2.default,
 		bindings: {
-			party: '<',
+			hostess: '<',
 			save: '&'
 		},
 		controller: _hostessCheckin4.default,
@@ -43746,7 +43742,7 @@
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<form ng-submit=\"hostessCheckinCtrl.addParty()\">\n\t<div class=\"form-group\">\n\t\t<h3>\n\t\t\tName of Party\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\" \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.party_name\"\n\t\t>\n\t\t<h3>\n\t\t\tNumber in Party\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"number\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.number_in_party\"\n\t\t>\n\t\t<h3>\n\t\t\tPhone Number\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.phone_number\"\n\t\t>\n\t\t<h3>\n\t\t\tSeating Preferences\n\t\t</h3>\n\t\t<div class=\"radio\">\n\t\t\t<label>\n\t\t\t\tAny\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"ANY\"\n\t\t\t\t\tchecked\t\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t\t<label>\n\t\t\t\tBooth\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"BOOTH\"\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t\t<label>\n\t\t\t\tTable\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"TABLE\"\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t</div>\n\t\t<h3>Additional Preferences</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.seating_requests\"\n\t\t>\n\t</div>\n\t<button class=\"guest-button\" type=\"submit\">\n\t\tAdd Party\n\t</button>\n</form>"
+	module.exports = "\n<form ng-submit=\"hostessCheckinCtrl.addParty()\">\n\t<div class=\"form-group\">\n\t\t<h3>\n\t\t\tName of Party\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\" \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.party_name\"\n\t\t>\n\t\t<h3>\n\t\t\tNumber in Party\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"number\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.number_in_party\"\n\t\t>\n\t\t<h3>\n\t\t\tPhone Number\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.phone_number\"\n\t\t>\n\t\t<h3>\n\t\t\tSeating Preferences\n\t\t</h3>\n\t\t<div class=\"radio\">\n\t\t\t<label>\n\t\t\t\tAny\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"ANY\"\n\t\t\t\t\tchecked\t\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t\t<label>\n\t\t\t\tBooth\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"BOOTH\"\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t\t<label>\n\t\t\t\tTable\n\t\t\t\t<input \n\t\t\t\t\ttype=\"radio\" \n\t\t\t\t\tng-model=\"hostessCheckinCtrl.party.seating\"\n\t\t\t\t\tvalue=\"TABLE\"\t\t\n\t\t\t\t>\n\t\t\t</label>\n\t\t</div>\n\t\t<h3>Additional Preferences</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tng-model=\"hostessCheckinCtrl.editedParty.seating_requests\"\n\t\t>\n\t</div>\n\t<button class=\"guest-button\" type=\"submit\" ng-click=\"hostessCheckinCtrl.addParty()\">\n\t\tAdd Party\n\t</button>\n</form>"
 
 /***/ },
 /* 23 */
@@ -43762,7 +43758,7 @@
 		var ctrl = this;
 		ctrl.editedParty = {};
 	
-		ctrl.addParty = function addParty() {
+		ctrl.saveParty = function saveParty() {
 			ctrl.save({ editedParty: ctrl.editedParty });
 		};
 	}
@@ -43834,7 +43830,11 @@
 	
 	function hostessAPIService($resource) {
 		var api = {
-			parties: $resource('/api/hostess/:id', { id: '@id' })
+			parties: $resource('/api/hostess/:id', { id: '@id' }, {
+				update: {
+					method: 'PUT'
+				}
+			})
 		};
 	
 		return api;
@@ -43981,7 +43981,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-xs-7\">\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div class=\"col-xs-2\">\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-xs-2\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-xs-1\">\n\t<button class=\"guest-button\">Order</button>\n</div>\n\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t<button \n\t\t\t\t\tclass=\"guest-button\"\n\n\t\t\t\t>\n\t\t\t\t\tOrder\n\t\t\t\t</button>\n\t\t\t</div>\n\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "<div class=\"col-xs-7\">\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div class=\"col-xs-2\">\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-xs-2\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-xs-1\">\n\t<button class=\"guest-button\">Order</button>\n</div>\n\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t<button \n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t>\n\t\t\t\t\tOrder\n\t\t\t\t</button>\n\t\t\t</div>\n\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 34 */
@@ -44212,7 +44212,7 @@
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "<button class=\"guest-button logins\">Login</button>\n<button class=\"guest-button logins\">Register</button>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"row\">\t\n\t<kitchen-party />\n</div>\n<div ng-repeat=\"party in partyPageCtrl.parties\">\n\t{{party}}\n</div>\n"
+	module.exports = "<div class=\"row login-button-row\">\n\t<button class=\"guest-button guest-logins\">Login</button>\n</div>\n<div class=\"row login-button-row\">\n\t<button class=\"guest-button guest-logins\">Register</button>\n</div>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"container\">\t\n\t<kitchen-party />\n</div>\n\n"
 
 /***/ },
 /* 45 */
@@ -44290,7 +44290,7 @@
 /* 48 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container page-link-buttons\">\n    <div class=\"row\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row\">\n        <button class=\"guest-button\"><a ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
 
 /***/ },
 /* 49 */

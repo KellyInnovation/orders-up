@@ -1,5 +1,9 @@
-<button class="guest-button logins">Login</button>
-<button class="guest-button logins">Register</button>
+<div class="row login-button-row">
+	<button class="guest-button guest-logins">Login</button>
+</div>
+<div class="row login-button-row">
+	<button class="guest-button guest-logins">Register</button>
+</div>
 
 <img class="guest-main-photo" src="/static/gourmet_food.jpeg"/>
 
@@ -7,9 +11,7 @@
 	<h1 class="menu-title">Menu</h1>
 </div>
 
-<div class="row">	
+<div class="container">	
 	<kitchen-party />
 </div>
-<div ng-repeat="party in partyPageCtrl.parties">
-	{{party}}
-</div>
+

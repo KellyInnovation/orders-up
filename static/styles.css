@@ -1,6 +1,6 @@
 body {
 	margin-top: 70px;
-	margin-bottom: 70px;
+	margin-bottom: 90px;
 }
 
 nav {
@@ -33,6 +33,11 @@ footer {
     vertical-align: middle;
 }
 
+.state-button-links{
+	text-decoration: none;
+	color: black;
+}
+
 .menu-title {
 	text-align: center;
 }
@@ -43,12 +48,21 @@ footer {
 	color: black;
 }
 
-.hostess-seating-rows :nth-of-type(odd) {
-
+.navbar-nav a {
+	text-decoration: none;
+	color: #d4af37;
 }
 
-.hostess-seating-rows :nth-of-type(even) {
+.login-button-row {
+	width: 100%;
+	text-align: center;
+}
 
+.guest-logins {
+	position: relative;
+	text-align: center;
+	z-index: 200;
+	margin: 5px;
 }
 
 .menu-categories {
@@ -64,11 +78,13 @@ footer {
 
 .guest-main-photo {
 	width: 100%;
+	position: relative;
+	top: -90px;
 }
 
 .page-link-buttons {
+	width: 100%;
 	text-align: center;
-	margin: auto 0;
 	position: fixed;
 	bottom: 20px;
 	background-color: white;

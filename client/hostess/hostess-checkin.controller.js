@@ -3,7 +3,7 @@ function HostessCheckinController() {
 	const ctrl = this;
 	ctrl.editedParty = {};
 
-	ctrl.addParty = function addParty() {
+	ctrl.saveParty = function saveParty() {
 		ctrl.save({ editedParty: ctrl.editedParty });
 	};
 }
