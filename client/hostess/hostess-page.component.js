@@ -1,10 +1,10 @@
 import template from './hostess-page.html';
 
-import HostessController from './hostess-page.controller';
+import HostessPageController from './hostess-page.controller';
 
 const hostessPageComponent = {
 	template,
-	controller: HostessController,
+	controller: HostessPageController,
 	controllerAs: 'hostessPageCtrl',
 };
 

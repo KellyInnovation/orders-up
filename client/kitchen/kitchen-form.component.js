@@ -5,7 +5,7 @@ import KitchenFormController from './kitchen-form.controller';
 const kitchenFormComponent = {
 	template,
 	bindings: {
-		menu_setting: '<',
+		menu: '<',
 		save: '&',
 	},
 	controller: KitchenFormController,

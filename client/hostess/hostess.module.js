@@ -8,8 +8,7 @@ import hostessSeatingComponent from './hostess-seating.component';
 
 import hostessAPIService from './hostess-api.service';
 
-const HostessModule = angular.module(
-	'parties', [
+const HostessModule = angular.module('hostess', [
 	'ngResource',
 	'angular.filter',
 

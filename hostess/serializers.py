@@ -7,4 +7,4 @@ class HostessSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Hostess
-		fields = ('id', 'checkin_time', 'party_name', 'number_in_party', 'phone_number', 'seating', 'seating_requests', )
+		fields = ('id', 'checkin_time', 'party_name', 'number_in_party', 'phone_number', 'seating', 'seating_requests',)

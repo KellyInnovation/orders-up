@@ -7,20 +7,21 @@ function HostessPageController(hostessAPIService) {
 		hostessAPIService.parties.get().$promise.then((data) => {
 			ctrl.parties = data.results;
 		});
+		console.log('hello')
 	};
 
 	getParties();
 
-	ctrl.saveParty = function saveParty(editedParty) {
-		hostessAPIService.parties.save(editedParty).$promise.then((savedParty) => {
-			ctrl.parties = [
-				savedParty,
-					ctrl.party,
-			];
-			ctrl.editedParty = {};
-			alert("party added")
-		}); 
-	};
+	// ctrl.saveParty = function saveParty(editedParty) {
+	// 	hostessAPIService.parties.save(editedParty).$promise.then((savedParty) => {
+	// 		ctrl.parties = [
+	// 			savedParty,
+	// 				ctrl.party,
+	// 		];
+	// 		ctrl.editedParty = {};
+	// 		alert("party added")
+	// 	}); 
+	// };
 }
 
 export default HostessPageController;

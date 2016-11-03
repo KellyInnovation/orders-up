@@ -1,5 +1,5 @@
 
-<form ng-submit="kitchenFormCtrl.addMenuSetting()">
+<form ng-submit="kitchenFormCtrl.saveMenuItem(editedMenu)">
 	<div class="form-group">
 		<h3>
 			Item Name
@@ -7,23 +7,23 @@
 		<input 
 			type="text" 
 			class="form-control" 
-			ng-model="kitchenFormCtrl.editedMenuSetting.item_name"
+			ng-model="kitchenFormCtrl.editedMenu.item_name"
 		>
 		<h3>
 			Item Description
 		</h3>
 		<input 
-			type="number"
+			type="text"
 			class="form-control" 
-			ng-model="kitchenFormCtrl.editedMenuSetting.item_description"
+			ng-model="kitchenFormCtrl.editedMenu.item_description"
 		>
 		<h3>
-			Phone Number
+			Item Price
 		</h3>
 		<input 
 			type="text"
 			class="form-control" 
-			ng-model="kitchenFormCtrl.editedMenuSetting.item_price"
+			ng-model="kitchenFormCtrl.editedMenu.item_price"
 		>
 		<h3>
 			Meat Size
@@ -31,17 +31,14 @@
 		<input 
 			type="text"
 			class="form-control" 
-			ng-model="kitchenFormCtrl.editedMenuSetting.meat_size"
+			ng-model="kitchenFormCtrl.editedMenu.meat_size"
 		>
 		<h3>
-			Seating Preferences
-		</h3>
-		<label>
 			Category
-		</label>
+		</h3>
 		<select 
 			class="form-control" 
-			ng-model="kitchenFormCtrl.editedMenuSetting.category" 
+			ng-model="kitchenFormCtrl.editedMenu.category" 
 		>
 			<option value="DRINKS">Drinks</option>
 			<option value="APPETIZERS">Appetizers</option>

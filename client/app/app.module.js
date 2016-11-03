@@ -20,16 +20,13 @@ const AppModule = angular.module('app', [
 
         $stateProvider.state('index', {
             url: '/',
-            // resolve: {
-            //     parties(
-            //         partyAPIService) {
-            //         return partyAPIService.getAllParties();
-            //     },
-            // },
             component: 'partyPage',
         }).state('kitchen', {
             url: '/kitchen',
             component: 'kitchenPage',
+        }).state('kitchen-form', {
+            url: 'kitchen-form',
+            component: 'kitchenForm'
         }).state('hostess', {
             url: '/hostess',
             // template: '<h1>Hi</h1><hostess-page></hostess-page>'

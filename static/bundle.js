@@ -78,11 +78,11 @@
 	
 	var _kitchen2 = _interopRequireDefault(_kitchen);
 	
-	var _party = __webpack_require__(39);
+	var _party = __webpack_require__(42);
 	
 	var _party2 = _interopRequireDefault(_party);
 	
-	var _app = __webpack_require__(44);
+	var _app = __webpack_require__(47);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -92,16 +92,13 @@
 	
 	    $stateProvider.state('index', {
 	        url: '/',
-	        // resolve: {
-	        //     parties(
-	        //         partyAPIService) {
-	        //         return partyAPIService.getAllParties();
-	        //     },
-	        // },
 	        component: 'partyPage'
 	    }).state('kitchen', {
 	        url: '/kitchen',
 	        component: 'kitchenPage'
+	    }).state('kitchen-form', {
+	        url: 'kitchen-form',
+	        component: 'kitchenForm'
 	    }).state('hostess', {
 	        url: '/hostess',
 	        // template: '<h1>Hi</h1><hostess-page></hostess-page>'
@@ -43638,7 +43635,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var HostessModule = _angular2.default.module('parties', ['ngResource', 'angular.filter']).config(function ($resourceProvider) {
+	var HostessModule = _angular2.default.module('hostess', ['ngResource', 'angular.filter']).config(function ($resourceProvider) {
 		$resourceProvider.defaults.stripTrailingSlashes = false;
 	}).factory('hostessAPIService', _hostessApi2.default).component('hostessPage', _hostessPage2.default).component('hostessCheckin', _hostessCheckin2.default).component('hostessSeating', _hostessSeating2.default);
 	
@@ -43682,7 +43679,7 @@
 /* 20 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -43696,17 +43693,21 @@
 			hostessAPIService.parties.get().$promise.then(function (data) {
 				ctrl.parties = data.results;
 			});
+			console.log('hello');
 		};
 	
 		getParties();
 	
-		ctrl.saveParty = function saveParty(editedParty) {
-			hostessAPIService.parties.save(editedParty).$promise.then(function (savedParty) {
-				ctrl.parties = [savedParty, ctrl.party];
-				ctrl.editedParty = {};
-				alert("party added");
-			});
-		};
+		// ctrl.saveParty = function saveParty(editedParty) {
+		// 	hostessAPIService.parties.save(editedParty).$promise.then((savedParty) => {
+		// 		ctrl.parties = [
+		// 			savedParty,
+		// 				ctrl.party,
+		// 		];
+		// 		ctrl.editedParty = {};
+		// 		alert("party added")
+		// 	}); 
+		// };
 	}
 	
 	exports.default = HostessPageController;
@@ -43873,7 +43874,11 @@
 	
 	var _kitchenParty2 = _interopRequireDefault(_kitchenParty);
 	
-	var _kitchenApi = __webpack_require__(38);
+	var _kitchenForm = __webpack_require__(38);
+	
+	var _kitchenForm2 = _interopRequireDefault(_kitchenForm);
+	
+	var _kitchenApi = __webpack_require__(41);
 	
 	var _kitchenApi2 = _interopRequireDefault(_kitchenApi);
 	
@@ -43881,7 +43886,7 @@
 	
 	var KitchenModule = _angular2.default.module('menus', ['ngResource', 'angular.filter']).config(function ($resourceProvider) {
 		$resourceProvider.defaults.stripTrailingSlashes = false;
-	}).factory('kitchenAPIService', _kitchenApi2.default).component('kitchenPage', _kitchenPage2.default).component('kitchenMenu', _kitchenMenu2.default).component('kitchenParty', _kitchenParty2.default);
+	}).factory('kitchenAPIService', _kitchenApi2.default).component('kitchenPage', _kitchenPage2.default).component('kitchenMenu', _kitchenMenu2.default).component('kitchenParty', _kitchenParty2.default).component('kitchenForm', _kitchenForm2.default);
 	
 	exports.default = KitchenModule;
 
@@ -43917,7 +43922,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-3\">\n\t\t<h2>Food to Hold</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>Preparing</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n</div>"
+	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-3\">\n\t\t<h2>Food to Hold</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>Preparing</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n</div>\n<kitchen-form\n\tmenu=\"kitchenFormCtrl.editedMenu\"\n\tsave=\"kitchenFormCtrl.saveMenu(editedMenu)\"\n/>"
 
 /***/ },
 /* 31 */
@@ -43931,6 +43936,14 @@
 	
 	function KitchenController(kitchenAPIService) {
 		var ctrl = this;
+		ctrl.editedMenu = {};
+	
+		ctrl.saveMenu = function saveMenu(editedMenu) {
+			kitchenAPIService.menus.save(editedMenu).$promise.then(function (savedMenu) {
+				ctrl.menus = [savedMenu, ctrl.kitchen];
+				ctrl.editedMenu = {};
+			});
+		};
 	}
 	
 	exports.default = KitchenController;
@@ -44049,6 +44062,69 @@
 
 /***/ },
 /* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _kitchenForm = __webpack_require__(39);
+	
+	var _kitchenForm2 = _interopRequireDefault(_kitchenForm);
+	
+	var _kitchenForm3 = __webpack_require__(40);
+	
+	var _kitchenForm4 = _interopRequireDefault(_kitchenForm3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var kitchenFormComponent = {
+		template: _kitchenForm2.default,
+		bindings: {
+			menu: '<',
+			save: '&'
+		},
+		controller: _kitchenForm4.default,
+		controllerAs: 'kitchenFormCtrl'
+	};
+	
+	exports.default = kitchenFormComponent;
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<form ng-submit=\"kitchenFormCtrl.saveMenuItem(editedMenu)\">\n\t<div class=\"form-group\">\n\t\t<h3>\n\t\t\tItem Name\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\" \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_name\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Description\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_description\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Price\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_price\"\n\t\t>\n\t\t<h3>\n\t\t\tMeat Size\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.meat_size\"\n\t\t>\n\t\t<h3>\n\t\t\tCategory\n\t\t</h3>\n\t\t<select \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.category\" \n\t\t>\n\t\t\t<option value=\"DRINKS\">Drinks</option>\n\t\t\t<option value=\"APPETIZERS\">Appetizers</option>\n\t\t\t<option value=\"SALADS\">Soups and Salads</option>\n\t\t\t<option value=\"BEEF\">Beef</option>\n\t\t\t<option value=\"POULTRY\">Poultry</option>\n\t\t\t<option value=\"PORK\">Pork</option>\n\t\t\t<option value=\"SEAFOOD\">Seafood</option>\n\t\t\t<option value=\"PASTA\">Pasta</option>\n\t\t\t<option value=\"SIDES\">Side Items</option>\n\t\t\t<option value=\"OTHER\">Other</option>\n\t\t\t<option value=\"DESSERTS\">Desserts</option>\n\t\t</select>\t\n\t</div>\n\t<button class=\"guest-button\" type=\"submit\">\n\t\tAdd Menu Item\n\t</button>\n</form>"
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	function KitchenFormController() {
+		var ctrl = this;
+		ctrl.editedMenu = {};
+	
+		ctrl.saveMenuItem = function saveMenuItem(editedMenu) {
+			kitchenAPIService.menus.save(editedMenu).$promise.then(function (editedMenu) {
+				ctrl.menus = [editedMenu, ctrl.menu];
+				ctrl.editedMenu = {};
+				alert("added");
+			});
+		};
+	}
+	
+	exports.default = KitchenFormController;
+
+/***/ },
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44059,7 +44135,11 @@
 	
 	function kitchenAPIService($resource) {
 		var api = {
-			menus: $resource('/api/kitchen/:id', { id: '@id' })
+			menus: $resource('/api/kitchen/:id', { id: '@id' }, {
+				update: {
+					method: 'PUT'
+				}
+			})
 		};
 	
 		return api;
@@ -44068,7 +44148,7 @@
 	exports.default = kitchenAPIService;
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44085,11 +44165,11 @@
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
-	var _partyPage = __webpack_require__(40);
+	var _partyPage = __webpack_require__(43);
 	
 	var _partyPage2 = _interopRequireDefault(_partyPage);
 	
-	var _partyApi = __webpack_require__(43);
+	var _partyApi = __webpack_require__(46);
 	
 	var _partyApi2 = _interopRequireDefault(_partyApi);
 	
@@ -44102,7 +44182,7 @@
 	exports.default = PartyModule;
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44111,11 +44191,11 @@
 		value: true
 	});
 	
-	var _partyPage = __webpack_require__(41);
+	var _partyPage = __webpack_require__(44);
 	
 	var _partyPage2 = _interopRequireDefault(_partyPage);
 	
-	var _partyPage3 = __webpack_require__(42);
+	var _partyPage3 = __webpack_require__(45);
 	
 	var _partyPage4 = _interopRequireDefault(_partyPage3);
 	
@@ -44130,13 +44210,13 @@
 	exports.default = partyPageComponent;
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "<button class=\"guest-button logins\">Login</button>\n<button class=\"guest-button logins\">Register</button>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"row\">\t\n\t<kitchen-party />\n</div>\n"
+	module.exports = "<button class=\"guest-button logins\">Login</button>\n<button class=\"guest-button logins\">Register</button>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"row\">\t\n\t<kitchen-party />\n</div>\n<div ng-repeat=\"party in partyPageCtrl.parties\">\n\t{{party}}\n</div>\n"
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -44160,7 +44240,7 @@
 	exports.default = PartyPageController;
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44180,7 +44260,7 @@
 	exports.default = partyAPIService;
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44189,11 +44269,11 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(45);
+	var _app = __webpack_require__(48);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(46);
+	var _app3 = __webpack_require__(49);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -44208,13 +44288,13 @@
 	exports.default = appComponent;
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Essen Homepage\n                    </a></li>\n                    <li><a ui-sref=\"kitchen-form\">Kitchen Menu Settings</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n"
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports) {
 
 	"use strict";

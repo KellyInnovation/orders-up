@@ -1,10 +1,17 @@
 
 function KitchenFormController() {
 	const ctrl = this;
-	ctrl.editedMenuSetting = {};
+	ctrl.editedMenu = {};
 
-	ctrl.addMenuSetting = function addMenuSetting() {
-		ctrl.save({ editedMenuSetting: ctrl.editedMenuSetting });
+	ctrl.saveMenuItem = function saveMenuItem(editedMenu) {
+		kitchenAPIService.menus.save(editedMenu).$promise.then((editedMenu) => {
+			ctrl.menus = [
+				editedMenu,
+					ctrl.menu,
+			];
+			ctrl.editedMenu = {};
+			alert("added")
+		})
 	};
 }
 
