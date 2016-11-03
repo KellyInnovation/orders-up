@@ -91,14 +91,13 @@
 	var AppModule = _angular2.default.module('app', [_angularUiRouter2.default, _guest2.default.name, _hostess2.default.name, _kitchen2.default.name, _party2.default.name]).component('app', _app2.default).config(function ($stateProvider) {
 	
 	    $stateProvider.state('index', {
-	        url: '/',
+	        url: '/'
+	    }).state('party', {
+	        url: '/party',
 	        component: 'partyPage'
 	    }).state('kitchen', {
 	        url: '/kitchen',
 	        component: 'kitchenPage'
-	    }).state('kitchen-form', {
-	        url: 'kitchen-form',
-	        component: 'kitchenForm'
 	    }).state('hostess', {
 	        url: '/hostess',
 	        component: 'hostessPage'
@@ -44047,6 +44046,7 @@
 	
 	function KitchenPartyController(kitchenAPIService) {
 		var ctrl = this;
+		ctrl.editedMenu = {};
 	
 		function getMenus() {
 			kitchenAPIService.menus.get().$promise.then(function (data) {
@@ -44095,7 +44095,7 @@
 /* 39 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<form ng-submit=\"kitchenFormCtrl.saveMenuItem(editedMenu)\">\n\t<div class=\"form-group\">\n\t\t<h3>\n\t\t\tItem Name\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\" \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_name\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Description\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_description\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Price\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_price\"\n\t\t>\n\t\t<h3>\n\t\t\tMeat Size\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.meat_size\"\n\t\t>\n\t\t<h3>\n\t\t\tCategory\n\t\t</h3>\n\t\t<select \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.category\" \n\t\t>\n\t\t\t<option value=\"DRINKS\">Drinks</option>\n\t\t\t<option value=\"APPETIZERS\">Appetizers</option>\n\t\t\t<option value=\"SALADS\">Soups and Salads</option>\n\t\t\t<option value=\"BEEF\">Beef</option>\n\t\t\t<option value=\"POULTRY\">Poultry</option>\n\t\t\t<option value=\"PORK\">Pork</option>\n\t\t\t<option value=\"SEAFOOD\">Seafood</option>\n\t\t\t<option value=\"PASTA\">Pasta</option>\n\t\t\t<option value=\"SIDES\">Side Items</option>\n\t\t\t<option value=\"OTHER\">Other</option>\n\t\t\t<option value=\"DESSERTS\">Desserts</option>\n\t\t</select>\t\n\t</div>\n\t<button class=\"guest-button\" type=\"submit\">\n\t\tAdd Menu Item\n\t</button>\n</form>"
+	module.exports = "\n<form ng-submit=\"kitchenFormCtrl.saveMenuItem()\">\n\t<div class=\"form-group\">\n\t\t<h3>\n\t\t\tItem Name\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\" \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_name\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Description\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_description\"\n\t\t>\n\t\t<h3>\n\t\t\tItem Price\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.item_price\"\n\t\t>\n\t\t<h3>\n\t\t\tMeat Size\n\t\t</h3>\n\t\t<input \n\t\t\ttype=\"text\"\n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.meat_size\"\n\t\t>\n\t\t<h3>\n\t\t\tCategory\n\t\t</h3>\n\t\t<select \n\t\t\tclass=\"form-control\" \n\t\t\tng-model=\"kitchenFormCtrl.editedMenu.category\" \n\t\t>\n\t\t\t<option value=\"DRINKS\">Drinks</option>\n\t\t\t<option value=\"APPETIZERS\">Appetizers</option>\n\t\t\t<option value=\"SALADS\">Soups and Salads</option>\n\t\t\t<option value=\"BEEF\">Beef</option>\n\t\t\t<option value=\"POULTRY\">Poultry</option>\n\t\t\t<option value=\"PORK\">Pork</option>\n\t\t\t<option value=\"SEAFOOD\">Seafood</option>\n\t\t\t<option value=\"PASTA\">Pasta</option>\n\t\t\t<option value=\"SIDES\">Side Items</option>\n\t\t\t<option value=\"OTHER\">Other</option>\n\t\t\t<option value=\"DESSERTS\">Desserts</option>\n\t\t</select>\t\n\t</div>\n\t<button class=\"guest-button\" type=\"submit\">\n\t\tAdd Menu Item\n\t</button>\n</form>"
 
 /***/ },
 /* 40 */
@@ -44113,7 +44113,7 @@
 	
 		ctrl.saveMenuItem = function saveMenuItem(editedMenu) {
 			kitchenAPIService.menus.save(editedMenu).$promise.then(function (editedMenu) {
-				ctrl.menus = [editedMenu, ctrl.menu];
+				ctrl.menus = [savedMenu, ctrl.menus];
 				ctrl.editedMenu = {};
 				alert("added");
 			});
@@ -44290,7 +44290,7 @@
 /* 48 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Essen Homepage\n                    </a></li>\n                    <li><a ui-sref=\"kitchen-form\">Kitchen Menu Settings</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container page-link-buttons\">\n    <div class=\"row\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row\">\n        <button class=\"guest-button\"><a ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
 
 /***/ },
 /* 49 */

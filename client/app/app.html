@@ -22,9 +22,11 @@
             <div id="header-navbar-collapse" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ui-sref="index">
-                        Essen Homepage
+                        Home Page
                     </a></li>
-                    <li><a ui-sref="kitchen-form">Kitchen Menu Settings</a></li>
+                    <li><a ui-sref="party">Guest Pages</a></li>
+                    <li><a ui-sref="hostess">Hostess</a></li>
+                    <li><a ui-sref="kitchen">Kitchen</a></li>
                 </ul>
                 
             </div>
@@ -35,4 +37,17 @@
 <div class="container">
 
     <ui-view></ui-view>
+</div>
+
+<div class="container page-link-buttons">
+    <div class="row">
+        Welcome to Order's Up, a system for restaurant efficiency.
+        Please select the appropriate page below.
+    </div>
+    <div class="row">
+        <button class="guest-button"><a ui-sref="index">Home Page</a></button>
+        <button class="guest-button"><a ui-sref="party">Guest Pages</a></button>
+        <button class="guest-button"><a ui-sref="hostess">Hostess</a></button>
+        <button class="guest-button"><a ui-sref="kitchen">Kitchen</a></button>
+    </div>
 </div>

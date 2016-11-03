@@ -16,8 +16,6 @@ footer {
 	width: 100%;
 }
 
-
-
 .icon-bar {
 	background-color: #d4af37;
 }
@@ -66,4 +64,12 @@ footer {
 
 .guest-main-photo {
 	width: 100%;
+}
+
+.page-link-buttons {
+	text-align: center;
+	margin: auto 0;
+	position: fixed;
+	bottom: 20px;
+	background-color: white;
 }

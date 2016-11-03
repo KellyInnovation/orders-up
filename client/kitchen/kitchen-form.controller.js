@@ -6,8 +6,8 @@ function KitchenFormController() {
 	ctrl.saveMenuItem = function saveMenuItem(editedMenu) {
 		kitchenAPIService.menus.save(editedMenu).$promise.then((editedMenu) => {
 			ctrl.menus = [
-				editedMenu,
-					ctrl.menu,
+				savedMenu,
+					ctrl.menus,
 			];
 			ctrl.editedMenu = {};
 			alert("added")
