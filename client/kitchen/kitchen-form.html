@@ -1,0 +1,62 @@
+
+<form ng-submit="kitchenFormCtrl.addMenuSetting()">
+	<div class="form-group">
+		<h3>
+			Item Name
+		</h3>
+		<input 
+			type="text" 
+			class="form-control" 
+			ng-model="kitchenFormCtrl.editedMenuSetting.item_name"
+		>
+		<h3>
+			Item Description
+		</h3>
+		<input 
+			type="number"
+			class="form-control" 
+			ng-model="kitchenFormCtrl.editedMenuSetting.item_description"
+		>
+		<h3>
+			Phone Number
+		</h3>
+		<input 
+			type="text"
+			class="form-control" 
+			ng-model="kitchenFormCtrl.editedMenuSetting.item_price"
+		>
+		<h3>
+			Meat Size
+		</h3>
+		<input 
+			type="text"
+			class="form-control" 
+			ng-model="kitchenFormCtrl.editedMenuSetting.meat_size"
+		>
+		<h3>
+			Seating Preferences
+		</h3>
+		<label>
+			Category
+		</label>
+		<select 
+			class="form-control" 
+			ng-model="kitchenFormCtrl.editedMenuSetting.category" 
+		>
+			<option value="DRINKS">Drinks</option>
+			<option value="APPETIZERS">Appetizers</option>
+			<option value="SALADS">Soups and Salads</option>
+			<option value="BEEF">Beef</option>
+			<option value="POULTRY">Poultry</option>
+			<option value="PORK">Pork</option>
+			<option value="SEAFOOD">Seafood</option>
+			<option value="PASTA">Pasta</option>
+			<option value="SIDES">Side Items</option>
+			<option value="OTHER">Other</option>
+			<option value="DESSERTS">Desserts</option>
+		</select>	
+	</div>
+	<button class="guest-button" type="submit">
+		Add Menu Item
+	</button>
+</form>

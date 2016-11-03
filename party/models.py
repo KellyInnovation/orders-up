@@ -8,6 +8,9 @@ class Party(models.Model):
 
 	hostess = models.OneToOneField('hostess.Hostess', primary_key=True)
 
+	
+
+
 # class GuestOrder(models.Model):
 
 # 	drink = models.CharField(max_length=30, default='water')

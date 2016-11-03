@@ -16,4 +16,14 @@ class Hostess(models.Model):
 	seating = models.CharField(max_length=100, choices=SEATING_CHOICES, default='Any')
 	seating_requests = models.TextField(max_length=500, null=True, blank=True)
 
-	
+	# def create_party_id(self, party_name, id):
+	# 	party_concat = "{}-{}".format(self.party_name, self.pk)
+
+	# 	party_id = self.create(party_concat=party_concat)
+
+	# 	return party_id
+
+	def save(self, *args, **kwargs):
+
+		super().save(*args, **kwargs)
+		party, created = Hostess.objects.get_or_create(hostess=self)
