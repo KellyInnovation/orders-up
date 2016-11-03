@@ -29,7 +29,6 @@ const AppModule = angular.module('app', [
             component: 'kitchenForm'
         }).state('hostess', {
             url: '/hostess',
-            // template: '<h1>Hi</h1><hostess-page></hostess-page>'
             component: 'hostessPage',
         });
     });
