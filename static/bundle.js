@@ -44022,13 +44022,13 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-4\">\n\t\t<h2>Check-In</h2>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7 col-md-offset-1\">\n\t\t<h2>Seating</h2>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.hostess | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-4\">\n\t\t<h1>Check-In</h1>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7 col-md-offset-1\">\n\t\t<h1>Seating</h1>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.hostess | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t\tdelete=\"hostessPageCtrl.deleteParty(partyToDelete)\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 22 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -44056,6 +44056,21 @@
 				};
 				ctrl.editedParty = {};
 				getParties();
+			});
+		};
+	
+		ctrl.deleteParty = function deleteParty(partyToDelete) {
+			var findParty = findIndex(function (item) {
+				return partyToDelete.id === item.id;
+			});
+			var index = findParty(ctrl.hostess);
+	
+			if (index !== -1) {
+				ctrl.hostess.splice(index, 1);
+			}
+	
+			hostessAPIService.hostess.delete(partyToDelete).$promise.then(function () {
+				alert('deleted');
 			});
 		};
 	}
@@ -52987,7 +53002,8 @@
 	var hostessSeatingComponent = {
 		template: _hostessSeating2.default,
 		bindings: {
-			party: '<'
+			party: '<',
+			delete: '&'
 		},
 		controller: _hostessSeating4.default,
 		controllerAs: 'hostessSeatingCtrl'
@@ -52999,7 +53015,7 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-md-7\">\n\t<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>\n</div>\n<div class=\"col-md-1\">\n\t<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>\n</div>\n<div class=\"col-md-4\">\n\t<button class=\"guest-button\">\n\t\t<a ui-sref=\"party({hostessId: hostessSeatingCtrl.party.id})\">\n\t\t\t{{ hostessSeatingCtrl.party.checkin_time }}\n\t\t</a>\n\t</button>\n</div>\n\n\n"
+	module.exports = "<div class=\"col-md-7\">\n\t<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>\n<!-- \t<button \n\t\tclass=\"btn\" \n\t\tng-click=\"hostessSeatingCtrl.deleteParty()\"\n\t>\n\t\t<i class=\"fa fa-trash-o\"></i>\n\t</button> -->\n</div>\n<div class=\"col-md-1\">\n\t<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>\n</div>\n<div class=\"col-md-4\">\n\t<button class=\"guest-button\">\n\t\t<a ui-sref=\"party({hostessId: hostessSeatingCtrl.party.id})\">\n\t\t\t{{ hostessSeatingCtrl.party.checkin_time }}\n\t\t</a>\n\t</button>\n</div>\n\n\n"
 
 /***/ },
 /* 29 */
@@ -53013,6 +53029,10 @@
 	
 	function HostessSeatingController() {
 		var ctrl = this;
+	
+		ctrl.deleteParty = function deleteParty() {
+			ctrl.delete({ partyToDelete: ctrl.party });
+		};
 	}
 	
 	exports.default = HostessSeatingController;
@@ -53145,7 +53165,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-3\">\n\t\t<h2>Food to Hold</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>Preparing</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n</div>\n<kitchen-form\n\tmenu=\"kitchenPageCtrl.editedMenu\"\n\tsave=\"kitchenPageCtrl.saveMenu(editedMenu)\"\n/>"
+	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-3\">\n\t\t<h2>Food to Hold</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>Preparing</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n</div>\n<kitchen-form\n\tmenu=\"kitchenPageCtrl.editedMenu\"\n\tsave=\"kitchenPageCtrl.saveMenu(editedMenu)\"\n/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"container\">\t\n\t<kitchen-party />\n</div>"
 
 /***/ },
 /* 34 */
@@ -53165,6 +53185,7 @@
 			kitchenAPIService.menus.save(editedMenu).$promise.then(function (savedMenu) {
 				ctrl.menus = [savedMenu, ctrl.menus];
 				ctrl.editedMenu = {};
+				getMenus();
 			});
 		};
 	}
@@ -53511,7 +53532,7 @@
 /* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row welcome-message\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a class=\"state-button-links\" ui-sref=\"party({ hostessId: 1})\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row welcome-message\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party({ hostessId: 1})\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
 
 /***/ },
 /* 52 */

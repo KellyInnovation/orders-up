@@ -16,8 +16,13 @@ footer {
 	width: 100%;
 }
 
-h2 {
+h1 {
 	text-align: center;
+}
+
+button a {
+	text-decoration: none;
+	color: black;
 }
 
 .icon-bar {
@@ -35,15 +40,6 @@ h2 {
     left: 0;
     text-align: center;
     vertical-align: middle;
-}
-
-.state-button-links{
-	text-decoration: none;
-	color: black;
-}
-
-.menu-title {
-	text-align: center;
 }
 
 .guest-button {

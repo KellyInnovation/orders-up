@@ -30,6 +30,19 @@ function HostessPageController(hostessAPIService) {
 		});
 	};
 
+	ctrl.deleteParty = function deleteParty(partyToDelete) {
+		const findParty = findIndex(item => partyToDelete.id === item.id);
+		const index = findParty(ctrl.hostess);
+
+		if (index !== -1) {
+			ctrl.hostess.splice(index, 1);
+		}
+
+		hostessAPIService.hostess.delete(partyToDelete).$promise.then(() => {
+			alert('deleted')
+		});
+	};
+
 }
 
 export default HostessPageController;

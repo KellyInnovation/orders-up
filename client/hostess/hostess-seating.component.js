@@ -6,6 +6,7 @@ const hostessSeatingComponent = {
 	template,
 	bindings: {
 		party: '<',
+		delete: '&',
 	},
 	controller: HostessSeatingController,
 	controllerAs: 'hostessSeatingCtrl',

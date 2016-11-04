@@ -1,14 +1,14 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<h2>Check-In</h2>
+		<h1>Check-In</h1>
 		<hostess-checkin 
 			party="hostessPageCtrl.editedParty"
 			save="hostessPageCtrl.saveParty(editedParty)"
 		/>
 	</div>
 	<div class="col-md-7 col-md-offset-1">
-		<h2>Seating</h2>
+		<h1>Seating</h1>
 		<div class="row">
 			<div class="col-md-7">
 				<h2>Party Name</h2>
@@ -25,6 +25,7 @@
 			<hostess-seating 
 				ng-repeat="party in hostessPageCtrl.hostess | orderBy: 'checkin_time'"
 				party="party"
+				delete="hostessPageCtrl.deleteParty(partyToDelete)"
 			/>
 			</div>
 		</div>
