@@ -4,8 +4,8 @@ function HostessPageController(hostessAPIService) {
 	ctrl.editedParty = {};
 
 	function getParties() {
-		hostessAPIService.parties.get().$promise.then((data) => {
-			ctrl.parties = data.results;
+		hostessAPIService.hostess.get().$promise.then((data) => {
+			ctrl.hostess = data.results;
 		});
 	};
 
@@ -18,7 +18,7 @@ function HostessPageController(hostessAPIService) {
 					ctrl.hostess,
 			];
 			ctrl.editedParty = {};
-			alert('Party added');
+			getParties();
 		});
 	};
 

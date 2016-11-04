@@ -1,5 +1,5 @@
 
-<form ng-submit="hostessCheckinCtrl.addParty()">
+<form ng-submit="hostessCheckinCtrl.saveParty()">
 	<div class="form-group">
 		<h3>
 			Name of Party
@@ -61,7 +61,7 @@
 			ng-model="hostessCheckinCtrl.editedParty.seating_requests"
 		>
 	</div>
-	<button class="guest-button" type="submit" ng-click="hostessCheckinCtrl.addParty()">
+	<button class="guest-button" type="submit" >
 		Add Party
 	</button>
 </form>

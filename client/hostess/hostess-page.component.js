@@ -4,6 +4,9 @@ import HostessPageController from './hostess-page.controller';
 
 const hostessPageComponent = {
 	template,
+	bindings: {
+		hostess: '<',
+	},
 	controller: HostessPageController,
 	controllerAs: 'hostessPageCtrl',
 };

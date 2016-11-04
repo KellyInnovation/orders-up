@@ -7,8 +7,7 @@ function kitchenAPIService($resource) {
 				update: {
 					method: 'PUT',
 				},
-			},
-		),
+			}),
 	};
 
 	return api;

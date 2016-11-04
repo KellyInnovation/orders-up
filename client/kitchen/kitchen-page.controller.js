@@ -7,7 +7,7 @@ function KitchenController(kitchenAPIService) {
 		kitchenAPIService.menus.save(editedMenu).$promise.then((savedMenu) => {
 			ctrl.menus = [
 				savedMenu,
-					ctrl.kitchen,
+					ctrl.menus,
 			];
 			ctrl.editedMenu = {};
 		});
