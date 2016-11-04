@@ -24,7 +24,7 @@ const AppModule = angular.module('app', [
         $stateProvider.state('index', {
             url: '/',
         }).state('party', {
-            url: '/party',
+            url: '/party/{hostessId}',
             component: 'partyPage',    
         }).state('kitchen', {
             url: '/kitchen',

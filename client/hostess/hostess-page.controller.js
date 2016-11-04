@@ -17,6 +17,14 @@ function HostessPageController(hostessAPIService) {
 				savedParty,
 					ctrl.hostess,
 			];
+			ctrl.createParty = function createParty(partyAPIService) {
+				partyAPIService.parties.save(editedParty).$promise.then((savedParty) => {
+					ctrl.parties = [
+						savedParty,
+							ctrl.parties,
+					];
+				});
+			};
 			ctrl.editedParty = {};
 			getParties();
 		});

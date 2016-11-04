@@ -98,7 +98,7 @@
 	    $stateProvider.state('index', {
 	        url: '/'
 	    }).state('party', {
-	        url: '/party',
+	        url: '/party/{hostessId}',
 	        component: 'partyPage'
 	    }).state('kitchen', {
 	        url: '/kitchen',
@@ -44022,7 +44022,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-5\">\n\t\t<h2>Check-In</h2>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7\">\n\t\t<h2>Seating</h2>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.hostess | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-4\">\n\t\t<h2>Check-In</h2>\n\t\t<hostess-checkin \n\t\t\tparty=\"hostessPageCtrl.editedParty\"\n\t\t\tsave=\"hostessPageCtrl.saveParty(editedParty)\"\n\t\t/>\n\t</div>\n\t<div class=\"col-md-7 col-md-offset-1\">\n\t\t<h2>Seating</h2>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-md-7\">\n\t\t\t\t<h2>Party Name</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<h2>#</h2>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-4\">\n\t\t\t\t<h2>Wait Time</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row \">\n\t\t\t<div class=\"hostess-seating-rows\">\n\t\t\t<hostess-seating \n\t\t\t\tng-repeat=\"party in hostessPageCtrl.hostess | orderBy: 'checkin_time'\"\n\t\t\t\tparty=\"party\"\n\t\t\t/>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 22 */
@@ -44049,6 +44049,11 @@
 		ctrl.saveParty = function saveParty(editedParty) {
 			hostessAPIService.hostess.save(editedParty).$promise.then(function (savedParty) {
 				ctrl.hostess = [savedParty, ctrl.hostess];
+				ctrl.createParty = function createParty(partyAPIService) {
+					partyAPIService.parties.save(editedParty).$promise.then(function (savedParty) {
+						ctrl.parties = [savedParty, ctrl.parties];
+					});
+				};
 				ctrl.editedParty = {};
 				getParties();
 			});
@@ -52994,7 +52999,7 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-md-7\">\n\t<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>\n</div>\n<div class=\"col-md-1\">\n\t<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>\n</div>\n<div class=\"col-md-4\">\n\t<button class=\"guest-button\">\n\t\t{{ hostessSeatingCtrl.party.checkin_time }}\n\t</button>\n</div>\n\n\n"
+	module.exports = "<div class=\"col-md-7\">\n\t<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>\n</div>\n<div class=\"col-md-1\">\n\t<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>\n</div>\n<div class=\"col-md-4\">\n\t<button class=\"guest-button\">\n\t\t<a ui-sref=\"party({hostessId: hostessSeatingCtrl.party.id})\">\n\t\t\t{{ hostessSeatingCtrl.party.checkin_time }}\n\t\t</a>\n\t</button>\n</div>\n\n\n"
 
 /***/ },
 /* 29 */
@@ -53506,7 +53511,7 @@
 /* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row welcome-message\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
 
 /***/ },
 /* 52 */

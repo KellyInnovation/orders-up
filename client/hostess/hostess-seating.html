@@ -6,7 +6,9 @@
 </div>
 <div class="col-md-4">
 	<button class="guest-button">
-		{{ hostessSeatingCtrl.party.checkin_time }}
+		<a ui-sref="party({hostessId: hostessSeatingCtrl.party.id})">
+			{{ hostessSeatingCtrl.party.checkin_time }}
+		</a>
 	</button>
 </div>
 
