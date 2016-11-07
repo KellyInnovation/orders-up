@@ -6,6 +6,7 @@ const kitchenMenuComponent = {
 	template,
 	bindings: {
 		item: '<',
+		save: '&',
 	},
 	controller: KitchenMenuController,
 	controllerAs: 'kitchenMenuCtrl',

@@ -82,11 +82,11 @@
 	
 	var _kitchen2 = _interopRequireDefault(_kitchen);
 	
-	var _party = __webpack_require__(45);
+	var _party = __webpack_require__(48);
 	
 	var _party2 = _interopRequireDefault(_party);
 	
-	var _app = __webpack_require__(50);
+	var _app = __webpack_require__(53);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -53121,7 +53121,11 @@
 	
 	var _kitchenForm2 = _interopRequireDefault(_kitchenForm);
 	
-	var _kitchenApi = __webpack_require__(44);
+	var _kitchenOrder = __webpack_require__(44);
+	
+	var _kitchenOrder2 = _interopRequireDefault(_kitchenOrder);
+	
+	var _kitchenApi = __webpack_require__(47);
 	
 	var _kitchenApi2 = _interopRequireDefault(_kitchenApi);
 	
@@ -53129,7 +53133,7 @@
 	
 	var KitchenModule = _angular2.default.module('menus', ['ngResource', 'angular.filter']).config(function ($resourceProvider) {
 		$resourceProvider.defaults.stripTrailingSlashes = false;
-	}).factory('kitchenAPIService', _kitchenApi2.default).component('kitchenPage', _kitchenPage2.default).component('kitchenMenu', _kitchenMenu2.default).component('kitchenParty', _kitchenParty2.default).component('kitchenForm', _kitchenForm2.default);
+	}).factory('kitchenAPIService', _kitchenApi2.default).component('kitchenPage', _kitchenPage2.default).component('kitchenMenu', _kitchenMenu2.default).component('kitchenParty', _kitchenParty2.default).component('kitchenForm', _kitchenForm2.default).component('kitchenOrder', _kitchenOrder2.default);
 	
 	exports.default = KitchenModule;
 
@@ -53165,13 +53169,13 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n\t<div class=\"col-md-3\">\n\t\t<h2>Food to Hold</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>Preparing</h2>\n\t</div>\n\t<div class=\"col-md-3\">\n\t\t<h2>To Cook</h2>\n\t</div>\n</div>\n<kitchen-form\n\tmenu=\"kitchenPageCtrl.editedMenu\"\n\tsave=\"kitchenPageCtrl.saveMenu(editedMenu)\"\n/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"container\">\t\n\t<kitchen-party />\n</div>"
+	module.exports = "<div class=\"row\">\n\t<kitchen-order\n\t\tng-repeat=\"menu in kitchenPageCtrl.menus\"\n\t\tmenu=\"menu\"\n\t/>\n</div>\n\n<kitchen-form\n\tmenu=\"kitchenPageCtrl.editedMenu\"\n\tsave=\"kitchenPageCtrl.saveMenu(editedMenu)\"\n/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"container\">\t\n\t<kitchen-party \n\t\tmenu=\"kitchenPageCtrl.editedMenu\"\n\t\tsave=\"kitchenPageCtrl.saveMenu(editedMenu)\"\n\t/>\n</div>"
 
 /***/ },
 /* 34 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -53180,6 +53184,15 @@
 	function KitchenController(kitchenAPIService) {
 		var ctrl = this;
 		ctrl.editedMenu = {};
+		ctrl.foodToOrder = {};
+	
+		function getOrders() {
+			kitchenAPIService.menus.get().$promise.then(function (data) {
+				ctrl.menus = data.results;
+			});
+		};
+	
+		getOrders();
 	
 		ctrl.saveMenu = function saveMenu(editedMenu) {
 			kitchenAPIService.menus.save(editedMenu).$promise.then(function (savedMenu) {
@@ -53187,6 +53200,21 @@
 				ctrl.editedMenu = {};
 				getMenus();
 			});
+		};
+	
+		ctrl.saveOrder = function saveOrder(foodToOrder) {
+			var findFood = findIndex(function (item) {
+				return foodToOrder.id === item.id;
+			});
+			var index = findFood(ctrl.menus);
+	
+			if (index !== -1) {
+				kitchenAPIService.menus.orders.save(foodToOrder).$promise.then(function (savedFood) {
+					ctrl.menus.orders = [savedFood, ctrl.item];
+					ctrl.foodToOrder = {};
+				});
+			};
+			alert('called');
 		};
 	}
 	
@@ -53215,7 +53243,8 @@
 	var kitchenMenuComponent = {
 		template: _kitchenMenu2.default,
 		bindings: {
-			item: '<'
+			item: '<',
+			save: '&'
 		},
 		controller: _kitchenMenu4.default,
 		controllerAs: 'kitchenMenuCtrl'
@@ -53227,7 +53256,7 @@
 /* 36 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-xs-7\">\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div class=\"col-xs-2\">\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-xs-2\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-xs-1\">\n\t<button class=\"guest-button\">Order</button>\n</div>\n\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t<button \n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t>\n\t\t\t\t\tOrder\n\t\t\t\t</button>\n\t\t\t</div>\n\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "\n\n<div \n\tclass=\"col-xs-7\" \n\tng-model=\"kitchenFormCtrl.editedOrder.orders.food\"\n>\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div \n\tclass=\"col-xs-2\"\n\tng-model=\"kitchenFormCtrl.editedOrder.orders.item_price\"\n>\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-xs-2\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-xs-1\">\n\t<button \n\t\tclass=\"guest-button\"\n\t\tng-click=\"kitchenMenuCtrl.saveOrder(foodToOrder)\"\n\t>\n\t\tOrder\n\t</button>\n</div>\n\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t<button \n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t>\n\t\t\t\t\tOrder\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 37 */
@@ -53241,6 +53270,11 @@
 	
 	function KitchenMenuController() {
 		var ctrl = this;
+		ctrl.foodToOrder = {};
+	
+		ctrl.saveOrder = function saveOrder(foodToOrder) {
+			ctrl.save({ foodToOrder: ctrl.foodToOrder });
+		};
 	}
 	
 	exports.default = KitchenMenuController;
@@ -53277,7 +53311,7 @@
 /* 39 */
 /***/ function(module, exports) {
 
-	module.exports = "<div >\n\t<div\n\t\tng-repeat=\"(key, value) in kitchenPartyCtrl.menus | groupBy: 'category'\"\n\t>\n\t\t<div class=\"col-xs-12 menu-categories\">\n\t\t\t<h3>{{ key }}</h3>\n\t\t</div>\n\t\t<kitchen-menu\n\t\t\tng-repeat=\"item in value\"\n\t\t\titem=\"item\"\n\t\t/>\n\t</div>\n</div>"
+	module.exports = "<div >\n\t<div\n\t\tng-repeat=\"(key, value) in kitchenPartyCtrl.menus | groupBy: 'category'\"\n\t>\n\t\t<div class=\"col-xs-12 menu-categories\">\n\t\t\t<h3>{{ key }}</h3>\n\t\t</div>\n\t\t<kitchen-menu\n\t\t\tng-repeat=\"item in value\"\n\t\t\titem=\"item\"\n\t\t\tmenu=\"kitchenPageCtrl.editedMenu\"\n\t\t\tsave=\"kitchenPageCtrl.saveOrder(foodToOrder)\"\n\n\t\t/>\n\t</div>\n</div>"
 
 /***/ },
 /* 40 */
@@ -53293,6 +53327,7 @@
 	function KitchenPartyController(kitchenAPIService) {
 		var ctrl = this;
 		ctrl.editedMenu = {};
+		ctrl.foodToOrder = {};
 	
 		function getMenus() {
 			kitchenAPIService.menus.get().$promise.then(function (data) {
@@ -53366,6 +53401,59 @@
 
 /***/ },
 /* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _kitchenOrder = __webpack_require__(45);
+	
+	var _kitchenOrder2 = _interopRequireDefault(_kitchenOrder);
+	
+	var _kitchenOrder3 = __webpack_require__(46);
+	
+	var _kitchenOrder4 = _interopRequireDefault(_kitchenOrder3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var kitchenOrderComponent = {
+		template: _kitchenOrder2.default,
+		bindings: {
+			menu: '<'
+		},
+		controller: _kitchenOrder4.default,
+		controllerAs: 'kitchenOrderCtrl'
+	};
+	
+	exports.default = kitchenOrderComponent;
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"col-md-3\">\n\t<h2>Food to Hold</h2>\n</div>\n<div class=\"col-md-3\">\n\t<h2>To Cook</h2>\n\t{{ kitchenOrderCtrl.menu.orders}}\n</div>\n<div class=\"col-md-3\">\n\t<h2>Preparing</h2>\n</div>\n<div class=\"col-md-3\">\n\t<h2>To Cook</h2>\n</div>"
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	function KitchenOrderController() {
+		var ctrl = this;
+	}
+	
+	exports.default = KitchenOrderController;
+
+/***/ },
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53389,7 +53477,7 @@
 	exports.default = kitchenAPIService;
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53406,11 +53494,11 @@
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
-	var _partyPage = __webpack_require__(46);
+	var _partyPage = __webpack_require__(49);
 	
 	var _partyPage2 = _interopRequireDefault(_partyPage);
 	
-	var _partyApi = __webpack_require__(49);
+	var _partyApi = __webpack_require__(52);
 	
 	var _partyApi2 = _interopRequireDefault(_partyApi);
 	
@@ -53423,7 +53511,7 @@
 	exports.default = PartyModule;
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53432,11 +53520,11 @@
 		value: true
 	});
 	
-	var _partyPage = __webpack_require__(47);
+	var _partyPage = __webpack_require__(50);
 	
 	var _partyPage2 = _interopRequireDefault(_partyPage);
 	
-	var _partyPage3 = __webpack_require__(48);
+	var _partyPage3 = __webpack_require__(51);
 	
 	var _partyPage4 = _interopRequireDefault(_partyPage3);
 	
@@ -53451,13 +53539,13 @@
 	exports.default = partyPageComponent;
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"row login-button-row\">\n\t<button class=\"guest-button guest-logins\">Login</button>\n</div>\n<div class=\"row login-button-row\">\n\t<button class=\"guest-button guest-logins\">Register</button>\n</div>\n\n<img class=\"guest-main-photo\" src=\"/static/gourmet_food.jpeg\"/>\n\n<div class=\"row\">\n\t<h1 class=\"menu-title\">Menu</h1>\n</div>\n\n<div class=\"container\">\t\n\t<kitchen-party />\n</div>\n"
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -53481,7 +53569,7 @@
 	exports.default = PartyPageController;
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53501,7 +53589,7 @@
 	exports.default = partyAPIService;
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53510,11 +53598,11 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(51);
+	var _app = __webpack_require__(54);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(52);
+	var _app3 = __webpack_require__(55);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -53529,13 +53617,13 @@
 	exports.default = appComponent;
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <nav class=\"navbar navbar-fixed-top\">\n        <div class=\"container\">\n            \n            <div class=\"navbar-header\">\n                <span class=\"col-xs-2\"><img src=\"/static/orders_up_logo.png\" id=\"orders-up\" ></span>\n                <span class=\"restaurant-name col-xs-8\">\n                    \n                    Essen\n                </span>            \n                <button \n                    type=\"button\"\n                    class=\"navbar-toggle collapsed col-xs-2\"\n                    data-toggle=\"collapse\"\n                    data-target=\"#header-navbar-collapse\"\n                >\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n            </div>\n            <div id=\"header-navbar-collapse\" class=\"collapse navbar-collapse\">\n                <ul class=\"nav navbar-nav navbar-right\">\n                    <li><a ui-sref=\"index\">\n                        Home Page\n                    </a></li>\n                    <li><a class=\"state-button-links\" ui-sref=\"party({ hostessId: 1})\">Guest Pages</a></li>\n                    <li><a ui-sref=\"hostess\">Hostess</a></li>\n                    <li><a ui-sref=\"kitchen\">Kitchen</a></li>\n                </ul>\n                \n            </div>\n        </div>\n    </nav>\n</header>\n\n<div class=\"container\">\n\n    <ui-view></ui-view>\n</div>\n\n<div class=\"container \">\n    <div class=\"row welcome-message\">\n        Welcome to Order's Up, a system for restaurant efficiency.\n        Please select the appropriate page below.\n    </div>\n    <div class=\"row page-link-buttons\">\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"index\">Home Page</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"party({ hostessId: 1})\">Guest Pages</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"hostess\">Hostess</a></button>\n        <button class=\"guest-button\"><a class=\"state-button-links\" ui-sref=\"kitchen\">Kitchen</a></button>\n    </div>\n</div>\n"
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports) {
 
 	"use strict";

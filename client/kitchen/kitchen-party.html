@@ -8,6 +8,9 @@
 		<kitchen-menu
 			ng-repeat="item in value"
 			item="item"
+			menu="kitchenPageCtrl.editedMenu"
+			save="kitchenPageCtrl.saveOrder(foodToOrder)"
+
 		/>
 	</div>
 </div>

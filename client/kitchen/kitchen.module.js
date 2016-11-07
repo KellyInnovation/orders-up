@@ -7,6 +7,7 @@ import kitchenPageComponent from './kitchen-page.component';
 import kitchenMenuComponent from './kitchen-menu.component';
 import kitchenPartyComponent from './kitchen-party.component';
 import kitchenFormComponent from './kitchen-form.component';
+import kitchenOrderComponent from './kitchen-order.component';
 
 import kitchenAPIService from './kitchen-api.service';
 
@@ -22,6 +23,7 @@ const KitchenModule = angular.module('menus', [
 	.component('kitchenPage', kitchenPageComponent)
 	.component('kitchenMenu', kitchenMenuComponent)
 	.component('kitchenParty', kitchenPartyComponent)
-	.component('kitchenForm', kitchenFormComponent);
+	.component('kitchenForm', kitchenFormComponent)
+	.component('kitchenOrder', kitchenOrderComponent);
 
 export default KitchenModule;

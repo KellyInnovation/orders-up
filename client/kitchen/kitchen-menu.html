@@ -1,7 +1,15 @@
-<div class="col-xs-7">
+
+
+<div 
+	class="col-xs-7" 
+	ng-model="kitchenFormCtrl.editedOrder.orders.food"
+>
 	{{kitchenMenuCtrl.item.item_name}}
 </div>
-<div class="col-xs-2">
+<div 
+	class="col-xs-2"
+	ng-model="kitchenFormCtrl.editedOrder.orders.item_price"
+>
 	{{kitchenMenuCtrl.item.item_price}}
 </div>
 <div class="col-xs-2">
@@ -9,13 +17,17 @@
 		class="guest-button food-modal-trigger"
 		data-toggle="modal"
 		data-target="#foodTarget{{kitchenMenuCtrl.item.id}}"
-
 	>
 		Description
 	</button>
 </div>
 <div class="col-xs-1">
-	<button class="guest-button">Order</button>
+	<button 
+		class="guest-button"
+		ng-click="kitchenMenuCtrl.saveOrder(foodToOrder)"
+	>
+		Order
+	</button>
 </div>
 
 
@@ -61,7 +73,7 @@
 					Order
 				</button>
 			</div>
-
+			
 		</div>
 	</div>
 </div>

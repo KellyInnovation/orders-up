@@ -1,18 +1,10 @@
-
 <div class="row">
-	<div class="col-md-3">
-		<h2>Food to Hold</h2>
-	</div>
-	<div class="col-md-3">
-		<h2>To Cook</h2>
-	</div>
-	<div class="col-md-3">
-		<h2>Preparing</h2>
-	</div>
-	<div class="col-md-3">
-		<h2>To Cook</h2>
-	</div>
+	<kitchen-order
+		ng-repeat="menu in kitchenPageCtrl.menus"
+		menu="menu"
+	/>
 </div>
+
 <kitchen-form
 	menu="kitchenPageCtrl.editedMenu"
 	save="kitchenPageCtrl.saveMenu(editedMenu)"
@@ -23,5 +15,8 @@
 </div>
 
 <div class="container">	
-	<kitchen-party />
+	<kitchen-party 
+		menu="kitchenPageCtrl.editedMenu"
+		save="kitchenPageCtrl.saveMenu(editedMenu)"
+	/>
 </div>

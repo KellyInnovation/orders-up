@@ -3,6 +3,7 @@
 function KitchenPartyController(kitchenAPIService) {
 	const ctrl = this;
 	ctrl.editedMenu = {};
+	ctrl.foodToOrder = {};
 
 	function getMenus() {
 		kitchenAPIService.menus.get().$promise.then((data) => {
