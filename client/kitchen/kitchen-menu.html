@@ -40,6 +40,19 @@
 			</div>
 			<div class="modal-body">
 				<div class="container">
+					<div ng-switch="kitchenMenuCtrl.item.category">
+						<img src="/static/appetizer.jpeg" ng-switch-when="APPETIZERS"/>
+						<img src="/static/soup.jpg" ng-switch-when="SALADS"/>
+						<img src="/static/beef.jpeg" ng-switch-when="BEEF"/>
+						<img src="/static/salmon.jpeg" ng-switch-when="SEAFOOD"/>
+						<img src="/static/chicken.jpg" ng-switch-when="POULTRY"/>
+						<img src="/static/pork.jpeg" ng-switch-when="PORK"/>
+						<img src="/static/pasta.jpeg" ng-switch-when="PASTA"/>
+						<img src="/static/drink.jpg" ng-switch-when="DRINKS"/>
+						<img src="/static/fries.jpeg" ng-switch-when="SIDES"/>
+						<img src="/static/dessert.jpeg" ng-switch-when="DESSERTS"/>
+						<img src="/static/pizza.jpg" ng-switch-when="OTHER"/>
+					</div>
 					<div class="row">
 						<h3>{{kitchenMenuCtrl.item.item_name}}</h3>
 					</div>
