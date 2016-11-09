@@ -7,16 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('hostess', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Party',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('drink', models.CharField(max_length=30, default='water')),
-                ('food', models.CharField(max_length=400, null=True, blank=True)),
-                ('special_instructions', models.CharField(max_length=500, null=True, blank=True)),
+                ('food', models.CharField(max_length=400, blank=True, null=True)),
+                ('order_price', models.DecimalField(decimal_places=0, max_digits=1000, default=0)),
+                ('special_instructions', models.CharField(max_length=500, blank=True, null=True)),
+                ('hostess', models.OneToOneField(to='hostess.Hostess')),
             ],
         ),
     ]

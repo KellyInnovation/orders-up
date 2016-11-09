@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='KitchenOrder',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('time_ordered', models.DateTimeField(auto_now_add=True)),
                 ('kitchen', models.ForeignKey(to='kitchen.Kitchen')),
                 ('party', models.ForeignKey(to='party.Party')),

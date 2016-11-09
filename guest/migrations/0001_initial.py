@@ -7,16 +7,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hostess', '0007_remove_hostess_unique_party_id'),
+        ('hostess', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Guest',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('first_name', models.CharField(max_length=70, null=True, blank=True)),
-                ('last_name', models.CharField(max_length=70, null=True, blank=True)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('first_name', models.CharField(max_length=70, blank=True, null=True)),
+                ('last_name', models.CharField(max_length=70, blank=True, null=True)),
                 ('party_url', models.ForeignKey(to='hostess.Hostess', default='1')),
             ],
         ),
