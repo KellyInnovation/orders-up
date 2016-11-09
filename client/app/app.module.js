@@ -18,14 +18,16 @@ const AppModule = angular.module('app', [
 	PartyModule.name,
 ])
     .component('app', appComponent)
-    .config(($stateProvider, $urlRouterProvider) => {
+    .config(($stateProvider, $urlRouterProvider, $resourceProvider) => {
+        $resourceProvider.defaults.stripTrailingSlashes = false;
         $urlRouterProvider.otherwise('/');
 
         $stateProvider.state('index', {
             url: '/',
         }).state('party', {
-            url: '/party/{hostessId}',
-            component: 'partyPage',    
+            url: '/party/{partyId}',
+            component: 'partyPage',  
+
         }).state('kitchen', {
             url: '/kitchen',
             component: 'kitchenPage',

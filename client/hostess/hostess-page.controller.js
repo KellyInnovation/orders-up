@@ -1,15 +1,25 @@
 
-function HostessPageController(hostessAPIService) {
+function HostessPageController(hostessAPIService, partyAPIService) {
 	const ctrl = this;
 	ctrl.editedParty = {};
 
-	function getParties() {
+	function getHostessParties() {
 		hostessAPIService.hostess.get().$promise.then((data) => {
 			ctrl.hostess = data.results;
 		});
+
 	};
 
-	getParties();	
+	getHostessParties();	
+
+	function getParty() {
+		partyAPIService.parties.get().$promise.then((data) => {
+			ctrl.parties = data.results;
+
+		});
+	};
+
+	getParty();
 
 	ctrl.saveParty = function saveParty(editedParty) {
 		hostessAPIService.hostess.save(editedParty).$promise.then((savedParty) => {
@@ -26,7 +36,7 @@ function HostessPageController(hostessAPIService) {
 				});
 			};
 			ctrl.editedParty = {};
-			getParties();
+			getHostessParties();
 		});
 	};
 

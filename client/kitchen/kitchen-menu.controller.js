@@ -1,10 +1,18 @@
 
-function KitchenMenuController() {
+function KitchenMenuController($stateParams, partyAPIService) {
 	const ctrl = this;
-	ctrl.foodToOrder = {};
+	ctrl.foodOrder = {};
 
-	ctrl.saveOrder = function saveOrder(foodToOrder) {
-		ctrl.save({ foodToOrder: ctrl.foodToOrder });
+	ctrl.addFood = function addFood(foodOrder) {
+		console.log("run save order")
+		console.log(ctrl.foodOrder)
+		partyAPIService.parties.update(foodOrder).$promise.then((savedFood) => {
+			ctrl.parties = [
+				savedFood,
+					ctrl.parties,
+			];
+			// ctrl.foodOrder = {};
+		});
 	};
 
 

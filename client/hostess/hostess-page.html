@@ -21,12 +21,22 @@
 			</div>
 		</div>
 		<div class="row ">
-			<div class="hostess-seating-rows">
-			<hostess-seating 
-				ng-repeat="party in hostessPageCtrl.hostess | orderBy: 'checkin_time'"
-				party="party"
-				delete="hostessPageCtrl.deleteParty(partyToDelete)"
-			/>
+			<div class="hostess-seating-rows" ng-repeat="host in hostessPageCtrl.hostess | orderBy: 'checkin_time'">
+				<div class="col-md-8">
+					<hostess-seating 
+						
+						host="host"
+						delete="hostessPageCtrl.deleteParty(partyToDelete)"
+					/>
+				</div>
+				<div class="col-md-4">
+					<party-hostess-buttons 
+						ng-repeat="party in hostessPageCtrl.parties"
+						party="party"
+						host="host"
+						ng-show="party.hostess == host.id"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>

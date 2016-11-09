@@ -13,6 +13,18 @@ function KitchenPartyController(kitchenAPIService) {
 
 	getMenus();
 
+	ctrl.saveOrder = function saveOrder(foodToOrder) {
+		console.log('party')
+		kitchenAPIService.menus.orders.save(foodToOrder).$promise.then((savedFood) => {
+				ctrl.menus.orders = [
+					savedFood, 
+						ctrl.item,
+				];
+				ctrl.foodToOrder = {};
+
+			});
+	};
+
 }
 
 export default KitchenPartyController;

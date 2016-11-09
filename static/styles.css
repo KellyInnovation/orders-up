@@ -86,10 +86,19 @@ button a {
 	top: -90px;
 }
 
+.party-menu-container {
+	position: relative;
+	top: -80px;
+}
+
 .page-link-buttons {
 	width: 100%;
 	text-align: center;
 	position: fixed;
 	bottom: 20px;
 	background-color: white;
+}
+
+.add-to-order {
+	margin: 20px;
 }

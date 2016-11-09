@@ -1,5 +1,6 @@
-<div class="col-md-7">
-	<h3>{{ hostessSeatingCtrl.party.party_name }}</h3>
+
+<div class="col-md-10">
+	<h3>{{ hostessSeatingCtrl.host.party_name }}</h3>
 <!-- 	<button 
 		class="btn" 
 		ng-click="hostessSeatingCtrl.deleteParty()"
@@ -7,15 +8,9 @@
 		<i class="fa fa-trash-o"></i>
 	</button> -->
 </div>
-<div class="col-md-1">
-	<h4>{{ hostessSeatingCtrl.party.number_in_party }}</h4>
+<div class="col-md-2">
+	<h4>{{ hostessSeatingCtrl.host.number_in_party }}</h4>
 </div>
-<div class="col-md-4">
-	<button class="guest-button">
-		<a ui-sref="party({hostessId: hostessSeatingCtrl.party.id})">
-			{{ hostessSeatingCtrl.party.checkin_time }}
-		</a>
-	</button>
-</div>
+
 
 

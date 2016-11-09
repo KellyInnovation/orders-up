@@ -5,7 +5,7 @@ import HostessSeatingController from './hostess-seating.controller';
 const hostessSeatingComponent = {
 	template,
 	bindings: {
-		party: '<',
+		host: '<',
 		delete: '&',
 	},
 	controller: HostessSeatingController,

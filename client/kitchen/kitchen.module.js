@@ -9,7 +9,11 @@ import kitchenPartyComponent from './kitchen-party.component';
 import kitchenFormComponent from './kitchen-form.component';
 import kitchenOrderComponent from './kitchen-order.component';
 
+import partyPageComponent from '../party/party-page.component';
+
 import kitchenAPIService from './kitchen-api.service';
+import partyAPIService from '../party/party-api.service';
+
 
 const KitchenModule = angular.module('menus', [
 	'ngResource',
@@ -20,6 +24,7 @@ const KitchenModule = angular.module('menus', [
 		$resourceProvider.defaults.stripTrailingSlashes = false;
 	})
 	.factory('kitchenAPIService', kitchenAPIService)
+	.factory('partyAPIService', partyAPIService)
 	.component('kitchenPage', kitchenPageComponent)
 	.component('kitchenMenu', kitchenMenuComponent)
 	.component('kitchenParty', kitchenPartyComponent)

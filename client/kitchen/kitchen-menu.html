@@ -1,18 +1,18 @@
 
 
 <div 
-	class="col-xs-7" 
+	class="col-md-7 col-xs-9" 
 	ng-model="kitchenFormCtrl.editedOrder.orders.food"
 >
 	{{kitchenMenuCtrl.item.item_name}}
 </div>
 <div 
-	class="col-xs-2"
+	class="col-md-2 col-xs-3"
 	ng-model="kitchenFormCtrl.editedOrder.orders.item_price"
 >
 	{{kitchenMenuCtrl.item.item_price}}
 </div>
-<div class="col-xs-2">
+<div class="col-md-2 col-xs-3 col-xs-offset-7">
 	<button 
 		class="guest-button food-modal-trigger"
 		data-toggle="modal"
@@ -21,15 +21,16 @@
 		Description
 	</button>
 </div>
-<div class="col-xs-1">
+<div class="col-md-1 col-xs-1">
 	<button 
-		class="guest-button"
-		ng-click="kitchenMenuCtrl.saveOrder(foodToOrder)"
-	>
+		class="guest-button order-modal-trigger"
+		
+		data-toggle="modal"
+		data-target="#orderTarget{{kitchenMenuCtrl.item.id}}"
+	>		
 		Order
 	</button>
 </div>
-
 
 <div 
 	class="modal fade "
@@ -52,6 +53,19 @@
 			</div>
 			<div class="modal-body">
 				<div class="container">
+					<div ng-switch="kitchenMenuCtrl.item.category">
+						<img src="/static/appetizer.jpeg" ng-switch-when="APPETIZERS"/>
+						<img src="/static/soup.jpg" ng-switch-when="SALADS"/>
+						<img src="/static/beef.jpeg" ng-switch-when="BEEF"/>
+						<img src="/static/salmon.jpeg" ng-switch-when="SEAFOOD"/>
+						<img src="/static/chicken.jpg" ng-switch-when="POULTRY"/>
+						<img src="/static/pork.jpeg" ng-switch-when="PORK"/>
+						<img src="/static/pasta.jpeg" ng-switch-when="PASTA"/>
+						<img src="/static/drink.jpg" ng-switch-when="DRINKS"/>
+						<img src="/static/fries.jpeg" ng-switch-when="SIDES"/>
+						<img src="/static/dessert.jpeg" ng-switch-when="DESSERTS"/>
+						<img src="/static/pizza.jpg" ng-switch-when="OTHER"/>
+					</div>
 					<div class="row">
 						<h3>{{kitchenMenuCtrl.item.item_name}}</h3>
 					</div>
@@ -74,6 +88,27 @@
 				</button>
 			</div>
 			
+		</div>
+	</div>
+</div>
+
+<div 
+	class="modal fade "
+	id="orderTarget{{kitchenMenuCtrl.item.id}}"
+	tabindex="-1"
+	role="dialog"
+>	
+	<div class="modal-dialog modal-lg" role="document">
+		
+		<div class="modal-content">
+
+			<party-order 				
+				order="kitchenMenuCtrl.item"
+				
+				party="kitchenMenuCtrl.editedOrder"
+				update="kitchenMenuCtrl.addFood(foodOrder)"
+			/>
+
 		</div>
 	</div>
 </div>

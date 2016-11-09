@@ -10,6 +10,8 @@ class Hostess(models.Model):
 	)
 
 	checkin_time = models.DateTimeField(auto_now_add=True)
+	# checkin_time = models.DurationField(default=timedelta(minutes=30))
+
 
 	party_name = models.CharField(max_length=200)
 	number_in_party = models.IntegerField()
