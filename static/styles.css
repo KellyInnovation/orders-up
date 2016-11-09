@@ -102,3 +102,8 @@ button a {
 .add-to-order {
 	margin: 20px;
 }
+
+.kitchen-orders {
+	background-color: #ededed;
+	text-align: center;
+}
