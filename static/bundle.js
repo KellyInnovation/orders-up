@@ -53047,15 +53047,6 @@
 		ctrl.deleteParty = function deleteParty() {
 			ctrl.delete({ partyToDelete: ctrl.party });
 		};
-	
-		function getParty() {
-			partyAPIService.parties.get().$promise.then(function (data) {
-				ctrl.parties = data.results;
-				console.log("party");
-			});
-		};
-	
-		getParty();
 	}
 	
 	exports.default = HostessSeatingController;
@@ -53297,7 +53288,7 @@
 /* 37 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n<div \n\tclass=\"col-md-7 col-xs-9\" \n\tng-model=\"kitchenFormCtrl.editedOrder.orders.food\"\n>\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div \n\tclass=\"col-md-2 col-xs-3\"\n\tng-model=\"kitchenFormCtrl.editedOrder.orders.item_price\"\n>\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-md-2 col-xs-3 col-xs-offset-7\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-md-1 col-xs-1\">\n\t<button \n\t\tclass=\"guest-button order-modal-trigger\"\n\t\t\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#orderTarget{{kitchenMenuCtrl.item.id}}\"\n\t>\t\t\n\t\tOrder\n\t</button>\n</div>\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div ng-switch=\"kitchenMenuCtrl.item.category\">\n\t\t\t\t\t\t<img src=\"/static/appetizer.jpeg\" ng-switch-when=\"APPETIZERS\"/>\n\t\t\t\t\t\t<img src=\"/static/soup.jpg\" ng-switch-when=\"SALADS\"/>\n\t\t\t\t\t\t<img src=\"/static/beef.jpeg\" ng-switch-when=\"BEEF\"/>\n\t\t\t\t\t\t<img src=\"/static/salmon.jpeg\" ng-switch-when=\"SEAFOOD\"/>\n\t\t\t\t\t\t<img src=\"/static/chicken.jpg\" ng-switch-when=\"POULTRY\"/>\n\t\t\t\t\t\t<img src=\"/static/pork.jpeg\" ng-switch-when=\"PORK\"/>\n\t\t\t\t\t\t<img src=\"/static/pasta.jpeg\" ng-switch-when=\"PASTA\"/>\n\t\t\t\t\t\t<img src=\"/static/drink.jpg\" ng-switch-when=\"DRINKS\"/>\n\t\t\t\t\t\t<img src=\"/static/fries.jpeg\" ng-switch-when=\"SIDES\"/>\n\t\t\t\t\t\t<img src=\"/static/dessert.jpeg\" ng-switch-when=\"DESSERTS\"/>\n\t\t\t\t\t\t<img src=\"/static/pizza.jpg\" ng-switch-when=\"OTHER\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t<button \n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t>\n\t\t\t\t\tOrder\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t</div>\n</div>\n\n<div \n\tclass=\"modal fade \"\n\tid=\"orderTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\n\t\t\t<party-order \t\t\t\t\n\t\t\t\torder=\"kitchenMenuCtrl.item\"\n\t\t\t\t\n\t\t\t\tparty=\"kitchenMenuCtrl.editedOrder\"\n\t\t\t\tupdate=\"kitchenMenuCtrl.addFood(foodOrder)\"\n\t\t\t/>\n\n\t\t</div>\n\t</div>\n</div>"
+	module.exports = "\n\n<div \n\tclass=\"col-md-7 col-xs-9\" \n\tng-model=\"kitchenFormCtrl.editedOrder.orders.food\"\n>\n\t{{kitchenMenuCtrl.item.item_name}}\n</div>\n<div \n\tclass=\"col-md-2 col-xs-3\"\n\tng-model=\"kitchenFormCtrl.editedOrder.orders.item_price\"\n>\n\t{{kitchenMenuCtrl.item.item_price}}\n</div>\n<div class=\"col-md-2 col-xs-3 col-xs-offset-7\">\n\t<button \n\t\tclass=\"guest-button food-modal-trigger\"\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#foodTarget{{kitchenMenuCtrl.item.id}}\"\n\t>\n\t\tDescription\n\t</button>\n</div>\n<div class=\"col-md-1 col-xs-1\">\n\t<button \n\t\tclass=\"guest-button order-modal-trigger\"\n\t\t\n\t\tdata-toggle=\"modal\"\n\t\tdata-target=\"#orderTarget{{kitchenMenuCtrl.item.id}}\"\n\t>\t\t\n\t\tOrder\n\t</button>\n</div>\n\n<div \n\tclass=\"modal fade \"\n\tid=\"foodTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\t\t\t\n\t\t\t<div class=\"modal-header\">\n\t\t\t\t\tEssen\n\t\t\t\t<button \n\t\t\t\t\tclass=\"close btn\"\n\t\t\t\t\tdata-dismiss=\"modal\"\t\t\t\t\n\t\t\t\t>\n\t\t\t\t\t<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<div ng-switch=\"kitchenMenuCtrl.item.category\">\n\t\t\t\t\t\t<img src=\"/static/appetizer.jpeg\" ng-switch-when=\"APPETIZERS\"/>\n\t\t\t\t\t\t<img src=\"/static/soup.jpg\" ng-switch-when=\"SALADS\"/>\n\t\t\t\t\t\t<img src=\"/static/beef.jpeg\" ng-switch-when=\"BEEF\"/>\n\t\t\t\t\t\t<img src=\"/static/salmon.jpeg\" ng-switch-when=\"SEAFOOD\"/>\n\t\t\t\t\t\t<img src=\"/static/chicken.jpg\" ng-switch-when=\"POULTRY\"/>\n\t\t\t\t\t\t<img src=\"/static/pork.jpeg\" ng-switch-when=\"PORK\"/>\n\t\t\t\t\t\t<img src=\"/static/pasta.jpeg\" ng-switch-when=\"PASTA\"/>\n\t\t\t\t\t\t<img src=\"/static/drink.jpg\" ng-switch-when=\"DRINKS\"/>\n\t\t\t\t\t\t<img src=\"/static/fries.jpeg\" ng-switch-when=\"SIDES\"/>\n\t\t\t\t\t\t<img src=\"/static/dessert.jpeg\" ng-switch-when=\"DESSERTS\"/>\n\t\t\t\t\t\t<img src=\"/static/pizza.jpg\" ng-switch-when=\"OTHER\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<h3>{{kitchenMenuCtrl.item.item_name}}</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t{{kitchenMenuCtrl.item.item_description}}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal-footer\">\n\t\t\t\t<button\n\t\t\t\t\tclass=\"guest-button\"\n\t\t\t\t\tdata-dismiss=\"modal\"\n\t\t\t\t>\n\t\t\t\t\tClose\n\t\t\t\t</button>\n\t\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t</div>\n</div>\n\n<div \n\tclass=\"modal fade \"\n\tid=\"orderTarget{{kitchenMenuCtrl.item.id}}\"\n\ttabindex=\"-1\"\n\trole=\"dialog\"\n>\t\n\t<div class=\"modal-dialog modal-lg\" role=\"document\">\n\t\t\n\t\t<div class=\"modal-content\">\n\n\t\t\t<party-order \t\t\t\t\n\t\t\t\torder=\"kitchenMenuCtrl.item\"\n\t\t\t\t\n\t\t\t\tparty=\"kitchenMenuCtrl.editedOrder\"\n\t\t\t\tupdate=\"kitchenMenuCtrl.addFood(foodOrder)\"\n\t\t\t/>\n\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ },
 /* 38 */
@@ -53313,11 +53304,12 @@
 		var ctrl = this;
 		ctrl.foodOrder = {};
 	
-		ctrl.addFood = function addFood(foodOrder) {
+		ctrl.addFood = function addFood(foodOrder, $stateParams) {
+	
 			console.log("run save order");
 			console.log(ctrl.foodOrder);
-			partyAPIService.parties.update(foodOrder).$promise.then(function (savedFood) {
-				ctrl.parties = [savedFood, ctrl.parties];
+			partyAPIService.parties.update(foodOrder).$promise.then(function () {
+	
 				// ctrl.foodOrder = {};
 			});
 		};
@@ -53687,7 +53679,6 @@
 		ctrl.foodOrder = { food: ctrl.order, id: $stateParams.partyId };
 	
 		ctrl.addFood = function addFood(foodOrder) {
-			// ctrl.foodOrder.push($stateParams.hostessId)
 			console.log($stateParams.partyId);
 			console.log(ctrl.foodOrder);
 			ctrl.update({ foodOrder: ctrl.foodOrder });
