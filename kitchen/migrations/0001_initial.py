@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Kitchen',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('item_name', models.CharField(max_length=200)),
                 ('item_description', models.TextField(blank=True, null=True)),
-                ('item_price', models.DecimalField(decimal_places=0, max_digits=1000)),
-                ('meat_size', models.CharField(max_length=20, blank=True, null=True)),
-                ('category', models.CharField(choices=[('APPETIZERS', 'Appetizers'), ('SALADS', 'Salads and Soups'), ('BEEF', 'Beef'), ('SEAFOOD', 'Seafood'), ('POULTRY', 'Poultry'), ('PORK', 'Pork'), ('PASTA', 'Pastas'), ('DRINKS', 'Drinks'), ('SIDES', 'Side Items'), ('DESSERTS', 'Desserts'), ('OTHER', 'Other')], null=True, max_length=100, blank=True, default='Other')),
+                ('item_price', models.DecimalField(max_digits=1000, decimal_places=0)),
+                ('meat_size', models.CharField(blank=True, max_length=20, null=True)),
+                ('category', models.CharField(default='Other', choices=[('APPETIZERS', 'Appetizers'), ('SALADS', 'Salads and Soups'), ('BEEF', 'Beef'), ('SEAFOOD', 'Seafood'), ('POULTRY', 'Poultry'), ('PORK', 'Pork'), ('PASTA', 'Pastas'), ('DRINKS', 'Drinks'), ('SIDES', 'Side Items'), ('DESSERTS', 'Desserts'), ('OTHER', 'Other')], blank=True, max_length=100, null=True)),
             ],
         ),
     ]
