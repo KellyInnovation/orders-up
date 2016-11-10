@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Party',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('drink', models.CharField(max_length=30, default='water')),
-                ('food', models.CharField(blank=True, null=True, max_length=400)),
-                ('order_price', models.DecimalField(max_digits=1000, decimal_places=0, default=0)),
-                ('special_instructions', models.CharField(blank=True, null=True, max_length=500)),
-                ('hostess', models.OneToOneField(to='hostess.Hostess')),
+                ('food', models.CharField(max_length=400, null=True, blank=True)),
+                ('order_price', models.DecimalField(max_digits=1000, default=0, decimal_places=0)),
+                ('special_instructions', models.CharField(max_length=500, null=True, blank=True)),
+                ('hostess', models.OneToOneField(blank=True, to='hostess.Hostess', null=True)),
             ],
         ),
     ]
