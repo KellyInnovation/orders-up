@@ -53245,7 +53245,6 @@
 			kitchenAPIService.menus.save(editedMenu).$promise.then(function (savedMenu) {
 				ctrl.menus = [savedMenu, ctrl.menus];
 				ctrl.editedMenu = {};
-				getMenus();
 			});
 		};
 	}

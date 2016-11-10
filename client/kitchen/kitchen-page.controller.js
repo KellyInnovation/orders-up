@@ -19,7 +19,7 @@ function KitchenController(kitchenAPIService) {
 					ctrl.menus,
 			];
 			ctrl.editedMenu = {};
-			getMenus();
+			
 		});
 	};
 
