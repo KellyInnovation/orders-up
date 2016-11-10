@@ -14,10 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Guest',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('first_name', models.CharField(blank=True, max_length=70, null=True)),
-                ('last_name', models.CharField(blank=True, max_length=70, null=True)),
-                ('party_url', models.ForeignKey(default='1', to='hostess.Hostess')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('first_name', models.CharField(blank=True, null=True, max_length=70)),
+                ('last_name', models.CharField(blank=True, null=True, max_length=70)),
+                ('party_url', models.ForeignKey(to='hostess.Hostess', default='1')),
             ],
         ),
     ]

@@ -7,15 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('party', '0001_initial'),
         ('kitchen', '0001_initial'),
+        ('party', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='KitchenOrder',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('time_ordered', models.DateTimeField(auto_now_add=True)),
                 ('kitchen', models.ForeignKey(to='kitchen.Kitchen')),
                 ('party', models.ForeignKey(to='party.Party')),
