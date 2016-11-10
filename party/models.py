@@ -8,7 +8,7 @@ class Party(models.Model):
 
 	special_instructions = models.CharField(max_length=500, null=True, blank=True)	
 
-	hostess = models.OneToOneField('hostess.Hostess')
+	hostess = models.OneToOneField('hostess.Hostess', null=True, blank=True)
 	
 
 
