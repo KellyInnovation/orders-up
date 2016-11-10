@@ -25,4 +25,4 @@ class Kitchen(models.Model):
 
 	# guest = models.ForeignKey('guest.Guest', null=True, blank=True, related_name='guest_menu')
 
-	orders = models.ManyToManyField('party.Party', through='kitchen_order.KitchenOrder', through_fields=('kitchen', 'party'))
+	#orders = models.ManyToManyField('party.Party', through='kitchen_order.KitchenOrder', through_fields=('kitchen', 'party'))
